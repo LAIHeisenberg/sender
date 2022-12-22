@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="5e2ce149-97ba-4a89-8ac9-04cbd38fb489" name="Default Changelist" comment="" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="ProjectId" id="2JDTpMPeu5vR7HPZ205ltEEARoi" />
+  <component name="ProjectViewState">
+    <option name="showExcludedFiles" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="aspect.path.notification.shown" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/main" />
+    <property name="project.structure.last.edited" value="Problems" />
+    <property name="project.structure.proportion" value="0.15" />
+    <property name="project.structure.side.proportion" value="0.2" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/main" />
+      <recent name="$PROJECT_DIR$/src/main/java/com/laiyz" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Application.ClientStarter">
+    <configuration name="ClientStarter" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.laiyz.client.ClientStarter" />
+      <module name="sender" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.laiyz.client.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ServerStarter" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.laiyz.server.ServerStarter" />
+      <module name="sender" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.laiyz.server.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.ClientStarter" />
+        <item itemvalue="Application.ServerStarter" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="5e2ce149-97ba-4a89-8ac9-04cbd38fb489" name="Default Changelist" comment="" />
+      <created>1671611835585</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1671611835585</updated>
+      <workItem from="1671611837800" duration="6217000" />
+      <workItem from="1671673260117" duration="21655000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="455" y="211" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1671612397192">
+      <screen x="74" y="27" width="1846" height="1053" />
+    </state>
+    <state x="455" y="211" key="#com.intellij.execution.impl.EditConfigurationsDialog/74.27.1846.1053@74.27.1846.1053" timestamp="1671612397192" />
+    <state x="805" y="261" width="374" height="592" key="#com.intellij.ide.util.MemberChooser" timestamp="1671616695277">
+      <screen x="74" y="27" width="1846" height="1053" />
+    </state>
+    <state x="805" y="261" width="374" height="592" key="#com.intellij.ide.util.MemberChooser/74.27.1846.1053@74.27.1846.1053" timestamp="1671616695277" />
+    <state width="1846" height="397" key="GridCell.Tab.0.bottom" timestamp="1671703621295">
+      <screen x="74" y="27" width="1846" height="1053" />
+    </state>
+    <state width="1846" height="397" key="GridCell.Tab.0.bottom/74.27.1846.1053@74.27.1846.1053" timestamp="1671703621295" />
+    <state width="1846" height="397" key="GridCell.Tab.0.center" timestamp="1671703621295">
+      <screen x="74" y="27" width="1846" height="1053" />
+    </state>
+    <state width="1846" height="397" key="GridCell.Tab.0.center/74.27.1846.1053@74.27.1846.1053" timestamp="1671703621295" />
+    <state width="1846" height="397" key="GridCell.Tab.0.left" timestamp="1671703621295">
+      <screen x="74" y="27" width="1846" height="1053" />
+    </state>
+    <state width="1846" height="397" key="GridCell.Tab.0.left/74.27.1846.1053@74.27.1846.1053" timestamp="1671703621295" />
+    <state width="1846" height="397" key="GridCell.Tab.0.right" timestamp="1671703621295">
+      <screen x="74" y="27" width="1846" height="1053" />
+    </state>
+    <state width="1846" height="397" key="GridCell.Tab.0.right/74.27.1846.1053@74.27.1846.1053" timestamp="1671703621295" />
+    <state width="1846" height="397" key="GridCell.Tab.1.bottom" timestamp="1671703621296">
+      <screen x="74" y="27" width="1846" height="1053" />
+    </state>
+    <state width="1846" height="397" key="GridCell.Tab.1.bottom/74.27.1846.1053@74.27.1846.1053" timestamp="1671703621296" />
+    <state width="1846" height="397" key="GridCell.Tab.1.center" timestamp="1671703621295">
+      <screen x="74" y="27" width="1846" height="1053" />
+    </state>
+    <state width="1846" height="397" key="GridCell.Tab.1.center/74.27.1846.1053@74.27.1846.1053" timestamp="1671703621295" />
+    <state width="1846" height="397" key="GridCell.Tab.1.left" timestamp="1671703621295">
+      <screen x="74" y="27" width="1846" height="1053" />
+    </state>
+    <state width="1846" height="397" key="GridCell.Tab.1.left/74.27.1846.1053@74.27.1846.1053" timestamp="1671703621295" />
+    <state width="1846" height="397" key="GridCell.Tab.1.right" timestamp="1671703621295">
+      <screen x="74" y="27" width="1846" height="1053" />
+    </state>
+    <state width="1846" height="397" key="GridCell.Tab.1.right/74.27.1846.1053@74.27.1846.1053" timestamp="1671703621295" />
+    <state x="480" y="131" width="1024" height="852" key="SettingsEditor" timestamp="1671612388937">
+      <screen x="74" y="27" width="1846" height="1053" />
+    </state>
+    <state x="480" y="131" width="1024" height="852" key="SettingsEditor/74.27.1846.1053@74.27.1846.1053" timestamp="1671612388937" />
+    <state width="923" height="526" key="XDebugger.FullValuePopup" timestamp="1671616279590">
+      <screen x="74" y="27" width="1846" height="1053" />
+    </state>
+    <state width="923" height="526" key="XDebugger.FullValuePopup/74.27.1846.1053@74.27.1846.1053" timestamp="1671616279590" />
+    <state x="651" y="381" key="com.intellij.ide.util.TipDialog" timestamp="1671673275953">
+      <screen x="74" y="27" width="1846" height="1053" />
+    </state>
+    <state x="651" y="381" key="com.intellij.ide.util.TipDialog/74.27.1846.1053@74.27.1846.1053" timestamp="1671673275953" />
+    <state x="567" y="197" width="860" height="712" key="find.popup" timestamp="1671698431796">
+      <screen x="74" y="27" width="1846" height="1053" />
+    </state>
+    <state x="567" y="197" width="860" height="712" key="find.popup/74.27.1846.1053@74.27.1846.1053" timestamp="1671698431796" />
+    <state x="660" y="259" width="672" height="678" key="search.everywhere.popup" timestamp="1671698435608">
+      <screen x="74" y="27" width="1846" height="1053" />
+    </state>
+    <state x="660" y="259" width="672" height="678" key="search.everywhere.popup/74.27.1846.1053@74.27.1846.1053" timestamp="1671698435608" />
+  </component>
+</project>

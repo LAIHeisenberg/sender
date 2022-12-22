@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="5e2ce149-97ba-4a89-8ac9-04cbd38fb489" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/laiyz/client/ClientStarter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/laiyz/client/ClientStarter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/laiyz/client/FileClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/laiyz/client/FileClient.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/laiyz/client/FileClientHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/laiyz/client/FileClientHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/laiyz/client/base/ClientCache.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/laiyz/client/base/ClientCache.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/laiyz/client/base/FileRspHelper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/laiyz/client/base/FileRspHelper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/laiyz/client/base/RspDispatcher.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/laiyz/client/base/RspDispatcher.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/laiyz/client/task/ITask.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/laiyz/client/task/ITask.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/laiyz/client/task/impl/FileTask.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/laiyz/client/task/impl/FileTask.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/laiyz/config/Config.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/laiyz/config/Config.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/laiyz/server/FileServerHandler2.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/laiyz/server/FileServerHandler2.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/laiyz/server/base/CmdRegister.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/laiyz/server/base/CmdRegister.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/laiyz/server/cmd/UploadReqHandler.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/laiyz/util/BFileUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/laiyz/util/BFileUtil.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/config.default.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/config.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/config.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/META-INF/sender.kotlin_module" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/laiyz/client/ClientStarter.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/laiyz/client/ClientStarter.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/laiyz/client/FileClient$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/laiyz/client/FileClient$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/laiyz/client/FileClient.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/laiyz/client/FileClient.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/laiyz/client/FileClientHandler.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/laiyz/client/FileClientHandler.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/laiyz/client/base/ClientCache.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/laiyz/client/base/ClientCache.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/laiyz/client/base/FileRspHelper.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/laiyz/client/base/FileRspHelper.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/laiyz/client/base/RspDispatcher.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/laiyz/client/base/RspDispatcher.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/laiyz/client/task/ITask.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/laiyz/client/task/ITask.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/laiyz/client/task/impl/FileTask.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/laiyz/client/task/impl/FileTask.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/laiyz/config/Config.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/laiyz/config/Config.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/laiyz/server/FileServerHandler2.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/laiyz/server/FileServerHandler2.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/laiyz/server/base/CmdRegister.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/laiyz/server/base/CmdRegister.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/laiyz/server/cmd/UploadReqHandler.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/laiyz/util/BFileUtil.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/laiyz/util/BFileUtil.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/config.default.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/config.properties" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/config.properties" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectId" id="2JDTpMPeu5vR7HPZ205ltEEARoi" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="showExcludedFiles" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="aspect.path.notification.shown" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="project.structure.last.edited" value="Problems" />
+    <property name="project.structure.proportion" value="0.15" />
+    <property name="project.structure.side.proportion" value="0.2" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/main" />
+      <recent name="$PROJECT_DIR$/src/main/java/com/laiyz" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Application.ClientStarter">
+    <configuration name="ClientStarter" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.laiyz.client.ClientStarter" />
+      <module name="sender" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.laiyz.client.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="FileTask" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.laiyz.client.task.impl.FileTask" />
+      <module name="sender" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.laiyz.client.task.impl.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ServerStarter" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.laiyz.server.ServerStarter" />
+      <module name="sender" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.laiyz.server.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.ClientStarter" />
+        <item itemvalue="Application.ServerStarter" />
+        <item itemvalue="Application.FileTask" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="5e2ce149-97ba-4a89-8ac9-04cbd38fb489" name="Default Changelist" comment="" />
+      <created>1671611835585</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1671611835585</updated>
+      <workItem from="1671611837800" duration="6217000" />
+      <workItem from="1671673260117" duration="50095000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="455" y="211" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1671612397192">
+      <screen x="74" y="27" width="1846" height="1053" />
+    </state>
+    <state x="455" y="211" key="#com.intellij.execution.impl.EditConfigurationsDialog/74.27.1846.1053@74.27.1846.1053" timestamp="1671612397192" />
+    <state x="805" y="261" width="374" height="592" key="#com.intellij.ide.util.MemberChooser" timestamp="1671616695277">
+      <screen x="74" y="27" width="1846" height="1053" />
+    </state>
+    <state x="805" y="261" width="374" height="592" key="#com.intellij.ide.util.MemberChooser/74.27.1846.1053@74.27.1846.1053" timestamp="1671616695277" />
+    <state width="1846" height="399" key="GridCell.Tab.0.bottom" timestamp="1671790088092">
+      <screen x="74" y="27" width="1846" height="1053" />
+    </state>
+    <state width="1846" height="399" key="GridCell.Tab.0.bottom/74.27.1846.1053@74.27.1846.1053" timestamp="1671790088092" />
+    <state width="1846" height="399" key="GridCell.Tab.0.center" timestamp="1671790088092">
+      <screen x="74" y="27" width="1846" height="1053" />
+    </state>
+    <state width="1846" height="399" key="GridCell.Tab.0.center/74.27.1846.1053@74.27.1846.1053" timestamp="1671790088092" />
+    <state width="1846" height="399" key="GridCell.Tab.0.left" timestamp="1671790088092">
+      <screen x="74" y="27" width="1846" height="1053" />
+    </state>
+    <state width="1846" height="399" key="GridCell.Tab.0.left/74.27.1846.1053@74.27.1846.1053" timestamp="1671790088092" />
+    <state width="1846" height="399" key="GridCell.Tab.0.right" timestamp="1671790088092">
+      <screen x="74" y="27" width="1846" height="1053" />
+    </state>
+    <state width="1846" height="399" key="GridCell.Tab.0.right/74.27.1846.1053@74.27.1846.1053" timestamp="1671790088092" />
+    <state width="1846" height="399" key="GridCell.Tab.1.bottom" timestamp="1671790088093">
+      <screen x="74" y="27" width="1846" height="1053" />
+    </state>
+    <state width="1846" height="399" key="GridCell.Tab.1.bottom/74.27.1846.1053@74.27.1846.1053" timestamp="1671790088093" />
+    <state width="1846" height="399" key="GridCell.Tab.1.center" timestamp="1671790088093">
+      <screen x="74" y="27" width="1846" height="1053" />
+    </state>
+    <state width="1846" height="399" key="GridCell.Tab.1.center/74.27.1846.1053@74.27.1846.1053" timestamp="1671790088093" />
+    <state width="1846" height="399" key="GridCell.Tab.1.left" timestamp="1671790088093">
+      <screen x="74" y="27" width="1846" height="1053" />
+    </state>
+    <state width="1846" height="399" key="GridCell.Tab.1.left/74.27.1846.1053@74.27.1846.1053" timestamp="1671790088093" />
+    <state width="1846" height="399" key="GridCell.Tab.1.right" timestamp="1671790088093">
+      <screen x="74" y="27" width="1846" height="1053" />
+    </state>
+    <state width="1846" height="399" key="GridCell.Tab.1.right/74.27.1846.1053@74.27.1846.1053" timestamp="1671790088093" />
+    <state x="480" y="131" width="1024" height="852" key="SettingsEditor" timestamp="1671612388937">
+      <screen x="74" y="27" width="1846" height="1053" />
+    </state>
+    <state x="480" y="131" width="1024" height="852" key="SettingsEditor/74.27.1846.1053@74.27.1846.1053" timestamp="1671612388937" />
+    <state width="923" height="526" key="XDebugger.FullValuePopup" timestamp="1671616279590">
+      <screen x="74" y="27" width="1846" height="1053" />
+    </state>
+    <state width="923" height="526" key="XDebugger.FullValuePopup/74.27.1846.1053@74.27.1846.1053" timestamp="1671616279590" />
+    <state x="651" y="381" key="com.intellij.ide.util.TipDialog" timestamp="1671673275953">
+      <screen x="74" y="27" width="1846" height="1053" />
+    </state>
+    <state x="651" y="381" key="com.intellij.ide.util.TipDialog/74.27.1846.1053@74.27.1846.1053" timestamp="1671673275953" />
+    <state x="567" y="197" width="860" height="712" key="find.popup" timestamp="1671698431796">
+      <screen x="74" y="27" width="1846" height="1053" />
+    </state>
+    <state x="567" y="197" width="860" height="712" key="find.popup/74.27.1846.1053@74.27.1846.1053" timestamp="1671698431796" />
+    <state x="660" y="259" width="672" height="678" key="search.everywhere.popup" timestamp="1671776344062">
+      <screen x="74" y="27" width="1846" height="1053" />
+    </state>
+    <state x="660" y="259" width="672" height="678" key="search.everywhere.popup/74.27.1846.1053@74.27.1846.1053" timestamp="1671776344062" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/laiyz/client/FileClientHandler.java</url>
+          <line>69</line>
+          <option name="timeStamp" value="8" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/laiyz/client/FileClientHandler.java</url>
+          <line>50</line>
+          <option name="timeStamp" value="10" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
+</project>

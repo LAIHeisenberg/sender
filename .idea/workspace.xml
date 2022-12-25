@@ -2,47 +2,122 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="5e2ce149-97ba-4a89-8ac9-04cbd38fb489" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/laiyz/client/ClientStarter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/laiyz/client/ClientStarter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/laiyz/client/FileClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/laiyz/client/FileClient.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/laiyz/client/FileClientHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/laiyz/client/FileClientHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/laiyz/client/base/ClientCache.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/laiyz/client/base/ClientCache.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/laiyz/client/base/FileRspHelper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/laiyz/client/base/FileRspHelper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/laiyz/client/base/RspDispatcher.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/laiyz/client/base/RspDispatcher.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/laiyz/client/task/ITask.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/laiyz/client/task/ITask.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/laiyz/client/task/impl/FileTask.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/laiyz/client/task/impl/FileTask.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/laiyz/config/Config.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/laiyz/config/Config.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/laiyz/server/FileServerHandler2.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/laiyz/server/FileServerHandler2.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/laiyz/server/base/CmdRegister.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/laiyz/server/base/CmdRegister.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/laiyz/server/cmd/UploadReqHandler.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/laiyz/util/BFileUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/laiyz/util/BFileUtil.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/config.default.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/laiyz/util/ConstUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/laiyz/util/ConstUtil.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/config.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/config.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/META-INF/sender.kotlin_module" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/laiyz/client/ClientStarter.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/laiyz/client/ClientStarter.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/laiyz/client/FileClient$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/laiyz/client/FileClient$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/laiyz/client/FileClient.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/laiyz/client/FileClient.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/laiyz/client/FileClientHandler.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/laiyz/client/FileClientHandler.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/laiyz/client/base/ClientCache.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/laiyz/client/base/ClientCache.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/laiyz/client/base/FileRspHelper.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/laiyz/client/base/FileRspHelper.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/laiyz/client/base/RspDispatcher.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/laiyz/client/base/RspDispatcher.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/laiyz/client/task/ITask.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/laiyz/client/task/ITask.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/laiyz/client/task/impl/FileTask.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/laiyz/client/task/impl/FileTask.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/laiyz/config/Config.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/laiyz/config/Config.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/laiyz/server/FileServerHandler2.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/laiyz/server/FileServerHandler2.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/laiyz/server/base/CmdRegister.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/laiyz/server/base/CmdRegister.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/laiyz/server/cmd/UploadReqHandler.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/laiyz/util/BFileUtil.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/laiyz/util/BFileUtil.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/config.default.properties" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/config.properties" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/config.properties" afterDir="false" />
     </list>
+    <ignored path="$PROJECT_DIR$/out/" />
+    <ignored path="$PROJECT_DIR$/target/" />
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="DefaultGradleProjectSettings">
+    <option name="isMigrated" value="true" />
+  </component>
+  <component name="FileEditorManager">
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/resources/config.properties">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="300">
+              <caret line="14" column="19" lean-forward="true" selection-start-line="14" selection-start-column="19" selection-end-line="14" selection-end-column="19" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/laiyz/client/ClientStarter.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="198">
+              <caret line="9" column="1" lean-forward="true" selection-start-line="9" selection-start-column="1" selection-end-line="9" selection-end-column="1" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/laiyz/client/FileClientHandler.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1012">
+              <caret line="68" column="50" lean-forward="true" selection-start-line="68" selection-start-column="50" selection-end-line="68" selection-end-column="50" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/laiyz/util/ConstUtil.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="208">
+              <caret line="14" column="31" selection-start-line="14" selection-start-column="31" selection-end-line="14" selection-end-column="31" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/laiyz/client/base/FileRspHelper.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="329">
+              <caret line="31" column="48" selection-start-line="31" selection-start-column="48" selection-end-line="31" selection-end-column="48" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/laiyz/client/task/impl/FileTask.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="146">
+              <caret line="217" column="29" lean-forward="true" selection-start-line="217" selection-start-column="29" selection-end-line="217" selection-end-column="29" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="jar://$MAVEN_REPOSITORY$/io/netty/netty-all/4.1.42.Final/netty-all-4.1.42.Final.jar!/io/netty/buffer/Unpooled.class">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="203">
+              <caret line="45" column="26" selection-start-line="45" selection-start-column="26" selection-end-line="45" selection-end-column="26" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/laiyz/server/FileServerHandler2.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="198">
+              <caret line="26" column="26" selection-start-line="26" selection-start-column="26" selection-end-line="26" selection-end-column="26" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/laiyz/client/base/RspDispatcher.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="357">
+              <caret line="24" column="24" lean-forward="true" selection-start-line="24" selection-start-column="24" selection-end-line="24" selection-end-column="24" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/laiyz/client/cmd/FileRspHandler.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="462">
+              <caret line="28" column="29" selection-start-line="28" selection-start-column="29" selection-end-line="28" selection-end-column="29" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -51,11 +126,140 @@
       </list>
     </option>
   </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>all complete</find>
+      <find>__10BBSTONE_BFILE_END01__</find>
+    </findStrings>
+  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="IdeDocumentHistory">
+    <option name="CHANGED_PATHS">
+      <list>
+        <option value="$PROJECT_DIR$/src/main/java/com/laiyz/util/ConstUtil.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/laiyz/client/task/ITask.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/laiyz/client/base/FileRspHelper.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/laiyz/client/FileClientHandler.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/laiyz/client/task/impl/FileTask.java" />
+        <option value="$PROJECT_DIR$/src/main/resources/config.properties" />
+        <option value="$PROJECT_DIR$/src/main/java/com/laiyz/client/ClientStarter.java" />
+      </list>
+    </option>
+  </component>
+  <component name="MavenProjectNavigator">
+    <treeState>
+      <expand>
+        <path>
+          <item name="" type="16c1761:MavenProjectsStructure$RootNode" />
+          <item name="sender" type="9519ce18:MavenProjectsStructure$ProjectNode" />
+        </path>
+        <path>
+          <item name="" type="16c1761:MavenProjectsStructure$RootNode" />
+          <item name="sender" type="9519ce18:MavenProjectsStructure$ProjectNode" />
+          <item name="Lifecycle" type="58874e2:MavenProjectsStructure$LifecycleNode" />
+        </path>
+      </expand>
+      <select />
+    </treeState>
+  </component>
+  <component name="ProjectFrameBounds" fullScreen="true">
+    <option name="width" value="1680" />
+    <option name="height" value="1050" />
+  </component>
   <component name="ProjectId" id="2JDTpMPeu5vR7HPZ205ltEEARoi" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectView">
+    <navigator proportions="" version="1">
+      <foldersAlwaysOnTop value="true" />
+    </navigator>
+    <panes>
+      <pane id="Scope" />
+      <pane id="ProjectPane">
+        <subPane>
+          <expand>
+            <path>
+              <item name="sender" type="b2602c69:ProjectViewProjectNode" />
+              <item name="sender" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="sender" type="b2602c69:ProjectViewProjectNode" />
+              <item name="sender" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="sender" type="b2602c69:ProjectViewProjectNode" />
+              <item name="sender" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="sender" type="b2602c69:ProjectViewProjectNode" />
+              <item name="sender" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="sender" type="b2602c69:ProjectViewProjectNode" />
+              <item name="sender" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="com" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="sender" type="b2602c69:ProjectViewProjectNode" />
+              <item name="sender" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="com" type="462c0819:PsiDirectoryNode" />
+              <item name="laiyz" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="sender" type="b2602c69:ProjectViewProjectNode" />
+              <item name="sender" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="com" type="462c0819:PsiDirectoryNode" />
+              <item name="laiyz" type="462c0819:PsiDirectoryNode" />
+              <item name="client" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="sender" type="b2602c69:ProjectViewProjectNode" />
+              <item name="sender" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="com" type="462c0819:PsiDirectoryNode" />
+              <item name="laiyz" type="462c0819:PsiDirectoryNode" />
+              <item name="server" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="sender" type="b2602c69:ProjectViewProjectNode" />
+              <item name="sender" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="resources" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="sender" type="b2602c69:ProjectViewProjectNode" />
+              <item name="sender" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="resources" type="462c0819:PsiDirectoryNode" />
+              <item name="ssl" type="462c0819:PsiDirectoryNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
+      <pane id="PackagesPane" />
+    </panes>
+  </component>
   <component name="ProjectViewState">
     <option name="showExcludedFiles" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -76,6 +280,18 @@
       <recent name="$PROJECT_DIR$/src/main/java/com/laiyz" />
     </key>
   </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+  </component>
   <component name="RunManager" selected="Application.ClientStarter">
     <configuration name="ClientStarter" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.laiyz.client.ClientStarter" />
@@ -83,19 +299,6 @@
       <extension name="coverage">
         <pattern>
           <option name="PATTERN" value="com.laiyz.client.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="FileTask" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="com.laiyz.client.task.impl.FileTask" />
-      <module name="sender" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.laiyz.client.task.impl.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -116,11 +319,14 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <list>
+      <item itemvalue="Application.ClientStarter" />
+      <item itemvalue="Application.ServerStarter" />
+    </list>
     <recent_temporary>
       <list>
         <item itemvalue="Application.ClientStarter" />
         <item itemvalue="Application.ServerStarter" />
-        <item itemvalue="Application.FileTask" />
       </list>
     </recent_temporary>
   </component>
@@ -136,8 +342,48 @@
       <updated>1671611835585</updated>
       <workItem from="1671611837800" duration="6217000" />
       <workItem from="1671673260117" duration="50095000" />
+      <workItem from="1671799144185" duration="486000" />
+      <workItem from="1671850432354" duration="12659000" />
     </task>
     <servers />
+  </component>
+  <component name="TimeTrackingManager">
+    <option name="totallyTimeSpent" value="13145000" />
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="0" y="0" width="1680" height="1050" extended-state="0" />
+    <layout>
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.21332519" />
+      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
+      <window_info id="Designer" order="2" />
+      <window_info id="Favorites" order="3" side_tool="true" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Find" order="1" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.4679285" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.55520505" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="TODO" order="6" />
+      <window_info anchor="bottom" id="Messages" order="7" />
+      <window_info anchor="bottom" id="Terminal" order="8" />
+      <window_info anchor="bottom" id="Docker" order="9" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
+      <window_info anchor="bottom" id="Run with VisualVM" order="11" />
+      <window_info anchor="bottom" id="VisualGC" order="12" side_tool="true" />
+      <window_info anchor="bottom" id="Database Changes" order="13" />
+      <window_info anchor="bottom" id="Version Control" order="14" />
+      <window_info anchor="bottom" id="Debug with VisualVM" order="15" />
+      <window_info anchor="bottom" id="MyBatis Log" order="16" />
+      <window_info anchor="bottom" id="Tail" order="17" />
+      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="right" id="Maven" order="3" weight="0.29767725" />
+      <window_info anchor="right" id="SciView" order="4" />
+      <window_info anchor="right" id="Database" order="5" />
+      <window_info anchor="right" id="Palette&#9;" order="6" />
+      <window_info anchor="right" id="RestServices" order="7" />
+    </layout>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
@@ -209,15 +455,143 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/com/laiyz/client/FileClientHandler.java</url>
-          <line>69</line>
-          <option name="timeStamp" value="8" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/com/laiyz/client/FileClientHandler.java</url>
-          <line>50</line>
-          <option name="timeStamp" value="10" />
+          <line>52</line>
+          <properties />
+          <option name="timeStamp" value="9" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
+  </component>
+  <component name="editorHistoryManager">
+    <entry file="jar://$MAVEN_REPOSITORY$/io/netty/netty-all/4.1.42.Final/netty-all-4.1.42.Final.jar!/io/netty/channel/SimpleChannelInboundHandler.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="351">
+          <caret line="44" column="37" lean-forward="true" selection-start-line="44" selection-start-column="37" selection-end-line="44" selection-end-column="37" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/laiyz/server/FileServerHandler.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="246">
+          <caret line="37" column="13" selection-start-line="37" selection-start-column="13" selection-end-line="37" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/laiyz/util/BFileUtil.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="317">
+          <caret line="34" selection-start-line="34" selection-end-line="42" selection-end-column="9" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/io/netty/netty-all/4.1.42.Final/netty-all-4.1.42.Final.jar!/io/netty/buffer/ByteBuf.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="246">
+          <caret line="57" column="24" selection-start-line="57" selection-start-column="24" selection-end-line="57" selection-end-column="24" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/laiyz/util/BByteUtil.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="246">
+          <caret line="23" column="25" selection-start-line="23" selection-start-column="25" selection-end-line="23" selection-end-column="25" />
+          <folding>
+            <element signature="e#593#594#0" expanded="true" />
+            <element signature="e#652#653#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/laiyz/client/task/ITask.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="66">
+          <caret line="5" lean-forward="true" selection-start-line="5" selection-end-line="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/laiyz/client/base/FileRspHelper.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="329">
+          <caret line="31" column="48" selection-start-line="31" selection-start-column="48" selection-end-line="31" selection-end-column="48" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/laiyz/util/ConstUtil.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="208">
+          <caret line="14" column="31" selection-start-line="14" selection-start-column="31" selection-end-line="14" selection-end-column="31" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/laiyz/server/ServerStarter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="44">
+          <caret line="2" column="13" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/laiyz/client/cmd/CmdHandler.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="154">
+          <caret line="10" column="25" selection-start-line="10" selection-start-column="25" selection-end-line="10" selection-end-column="25" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/laiyz/client/base/RspDispatcher.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="357">
+          <caret line="24" column="24" lean-forward="true" selection-start-line="24" selection-start-column="24" selection-end-line="24" selection-end-column="24" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/laiyz/client/cmd/FileRspHandler.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="462">
+          <caret line="28" column="29" selection-start-line="28" selection-start-column="29" selection-end-line="28" selection-end-column="29" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/io/netty/netty-all/4.1.42.Final/netty-all-4.1.42.Final.jar!/io/netty/buffer/Unpooled.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="203">
+          <caret line="45" column="26" selection-start-line="45" selection-start-column="26" selection-end-line="45" selection-end-column="26" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/laiyz/server/FileServerHandler2.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="198">
+          <caret line="26" column="26" selection-start-line="26" selection-start-column="26" selection-end-line="26" selection-end-column="26" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/laiyz/client/task/impl/FileTask.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="146">
+          <caret line="217" column="29" lean-forward="true" selection-start-line="217" selection-start-column="29" selection-end-line="217" selection-end-column="29" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/config.properties">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="300">
+          <caret line="14" column="19" lean-forward="true" selection-start-line="14" selection-start-column="19" selection-end-line="14" selection-end-column="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/laiyz/client/FileClientHandler.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1012">
+          <caret line="68" column="50" lean-forward="true" selection-start-line="68" selection-start-column="50" selection-end-line="68" selection-end-column="50" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/laiyz/client/ClientStarter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="198">
+          <caret line="9" column="1" lean-forward="true" selection-start-line="9" selection-start-column="1" selection-end-line="9" selection-end-column="1" />
+        </state>
+      </provider>
+    </entry>
   </component>
 </project>

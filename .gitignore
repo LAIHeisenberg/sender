@@ -16,6 +16,7 @@ HELP.md
 *.iws
 *.iml
 *.ipr
+.idea/**
 
 ### NetBeans ###
 /nbproject/private/
@@ -30,5 +31,5 @@ HELP.md
 .idea/**
 
 **/target/**
-
+target/
 **/*.code-workspace

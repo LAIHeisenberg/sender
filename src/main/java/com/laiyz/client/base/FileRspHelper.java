@@ -29,7 +29,7 @@ public class FileRspHelper {
             fileTask.addListner(new FileTaskListener());
         }
         // append part of file data to storage buffer(sbuf) of task
-        StatusEnum status = fileTask.appendFileData(fileData, rsp);
+        StatusEnum status = fileTask.appendFileData(ctx,fileData, rsp);
         // all file data received, try to start next file download
         if (status == StatusEnum.COMPLETED) {
             log.info("file({}) transfer complete.", rsp.getFilepath());
@@ -56,13 +56,12 @@ public class FileRspHelper {
         // all files downloaded
         if (nextFile == null) {
             ClientCache.cleanAll();
-            log.info("all files received, can stop client now(ChunkedWriteHandler need to wait).");
+            log.info("all files received.");
 
+            ctx.write(Unpooled.wrappedBuffer(ConstUtil.bfile_info_prefix.getBytes(CharsetUtil.UTF_8)));
+            String text = "all completed";
+            ctx.writeAndFlush(Unpooled.wrappedBuffer(text.getBytes(CharsetUtil.UTF_8)));
 
-            String text = "all complete";
-            ctx.write(text);
-            ctx.writeAndFlush(Unpooled.wrappedBuffer(ConstUtil.delimiter.getBytes(CharsetUtil.UTF_8)));
-//            System.exit(0);
         }
     }
 

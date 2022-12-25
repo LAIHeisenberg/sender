@@ -4,6 +4,7 @@ import com.laiyz.client.base.RspDispatcher;
 import com.laiyz.comm.BFileCmd;
 import com.laiyz.config.Config;
 import com.laiyz.proto.BFileMsg;
+import com.laiyz.util.BByteUtil;
 import com.laiyz.util.BFileUtil;
 import com.laiyz.util.ConstUtil;
 import io.netty.buffer.ByteBuf;
@@ -47,8 +48,28 @@ public class FileClientHandler extends SimpleChannelInboundHandler<ByteBuf> {
 
     }
 
+    @Override
     public void channelRead0(ChannelHandlerContext ctx, ByteBuf msg) throws Exception {
-        log.debug("client recv total readableBytes: {}", msg.readableBytes());
+
+        int len = msg.readableBytes();
+
+        if (len < ConstUtil.bfile_info_prefix_len){
+            return;
+        }
+        msg.markReaderIndex();
+        byte[] data = new byte[ConstUtil.bfile_info_prefix_len];
+        msg.readBytes(data);
+        String prefix = BByteUtil.toStr(data);
+        if (ConstUtil.bfile_info_prefix.equals(prefix)) {
+            int subLen = len - ConstUtil.bfile_info_prefix_len;
+            byte[] b = new byte[subLen];
+            msg.readBytes(b);
+            String result = BByteUtil.toStr(b);
+            log.info(result);
+//            if ("all completed".equals(result)){
+////                System.exit(0);
+////            }
+        }
 //        RspDispatcher.dispatch(ctx, msg);
     }
 

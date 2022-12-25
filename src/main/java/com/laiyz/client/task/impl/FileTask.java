@@ -5,6 +5,11 @@ import com.laiyz.client.task.TaskListener;
 import com.laiyz.comm.StatusEnum;
 import com.laiyz.proto.BFileMsg;
 import com.laiyz.util.BFileUtil;
+import com.laiyz.util.ConstUtil;
+import io.netty.buffer.ByteBuf;
+import io.netty.buffer.Unpooled;
+import io.netty.channel.ChannelHandlerContext;
+import io.netty.util.CharsetUtil;
 import lombok.extern.slf4j.Slf4j;
 
 import java.io.File;
@@ -83,7 +88,8 @@ public class FileTask implements ITask {
         }
     }
 
-    public StatusEnum appendFileData(byte[] fileData, BFileMsg.BFileRsp rsp) {
+    @Override
+    public StatusEnum appendFileData(ChannelHandlerContext ctx, byte[] fileData, BFileMsg.BFileRsp rsp) {
         counter++;
         int len = fileData.length;
         if (len <= 0) {
@@ -97,13 +103,13 @@ public class FileTask implements ITask {
         spos += len;
         recvSize += len;
 
-        long rspTs = rsp.getRspTs() / 1000;
-        long currTs = System.currentTimeMillis() / 1000;
-        DecimalFormat df = new DecimalFormat("#.00");
-        String avgSpeed = df.format(recvSize / (currTs-rspTs) / (1024d * 1024d));
+//        log.info("recv file data len: {}, progress: {}/{}({}%) avg speed:{}MB/s", len, recvSize, fileSize, Math.floor((recvSize*1d/fileSize*1d) * 10000)/100, avgSpeed);
 
-        log.info("recv file data len: {}, progress: {}/{}({}%) avg speed:{}MB/s", len, recvSize, fileSize, Math.floor((recvSize*1d/fileSize*1d) * 10000)/100, avgSpeed);
-        boolean saveOK = false;
+        String resp = String.format("recv file data, progress: %s/%s(%s) avg speed:%s", recvSize, fileSize, Math.floor((recvSize*1d/fileSize*1d) * 10000)/100, calcAvgSpeed(recvSize, rsp.getReqTs()));
+        ctx.write(Unpooled.wrappedBuffer(ConstUtil.bfile_info_prefix.getBytes(CharsetUtil.UTF_8)));
+        ctx.writeAndFlush(Unpooled.wrappedBuffer(resp.getBytes(CharsetUtil.UTF_8)));
+
+        boolean saveOK;
         // sbuf full or all file data received
         if (spos >= SBUF_SIZE || recvSize == fileSize) {
             // do save file data to disk
@@ -140,8 +146,7 @@ public class FileTask implements ITask {
             for (TaskListener listener : listener) {
                 listener.onCompleted(rsp);
             }
-//            ClientCache.resetRecvFileKey();
-//            ClientCache.removeTask(rsp.getId());
+
             return StatusEnum.COMPLETED;
         }
         log.info("recvSize: {}, saveSize: {}, fileSize: {}", recvSize, saveSize, fileSize);
@@ -206,6 +211,22 @@ public class FileTask implements ITask {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    private String calcAvgSpeed(long recvSize, long reqTs){
+
+        reqTs = reqTs / 1000;
+        long currTs = System.currentTimeMillis() / 1000;
+        double xKb = recvSize * 1d / Math.max((currTs-reqTs),0.5) / 1024;
+        if (xKb < 1024){
+            DecimalFormat df = new DecimalFormat("####.00");
+            return df.format(xKb)+"KB/S";
+        }else {
+            double xmb = xKb / 1024;
+            DecimalFormat df = new DecimalFormat("#0.00");
+            return df.format(xmb)+"MB/S";
+        }
+
     }
 
 }

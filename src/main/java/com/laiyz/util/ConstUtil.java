@@ -10,7 +10,7 @@ public class ConstUtil {
 
     // cannot used ":-)" as delimiter, when send video will cause lost bytes
     public static final String bfile_info_prefix = "__10BBSTONE_BFILE_START01__";
-    public static final int bfile_info_prefix_len = bfile_info_prefix.getBytes(CharsetUtil.UTF_8).length;;
+    public static final int bfile_info_prefix_len = bfile_info_prefix.getBytes(CharsetUtil.UTF_8).length;
 
     public static final String delimiter = "__10BBSTONE_BFILE_END01__";
 

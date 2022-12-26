@@ -17,12 +17,17 @@
 package com.laiyz.server;
 
 import com.laiyz.proto.BFileMsg;
+import com.laiyz.proto.SenderMsg;
 import com.laiyz.server.base.ReqDispatcher;
+import com.laiyz.util.BFileUtil;
 import com.laiyz.util.ConstUtil;
+import io.netty.buffer.ByteBuf;
+import io.netty.buffer.Unpooled;
 import io.netty.channel.ChannelFutureListener;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.DefaultFileRegion;
 import io.netty.channel.SimpleChannelInboundHandler;
+import io.netty.util.CharsetUtil;
 import lombok.extern.slf4j.Slf4j;
 
 import java.io.RandomAccessFile;
@@ -35,7 +40,7 @@ import java.io.RandomAccessFile;
  *
  */
 @Slf4j
-public class FileServerHandler extends SimpleChannelInboundHandler<BFileMsg.BFileReq> {
+public class FileServerHandler extends SimpleChannelInboundHandler<ByteBuf> {
 
     @Override
     public void channelActive(ChannelHandlerContext ctx) {
@@ -43,12 +48,29 @@ public class FileServerHandler extends SimpleChannelInboundHandler<BFileMsg.BFil
     }
 
     @Override
-    public void channelRead0(ChannelHandlerContext ctx, BFileMsg.BFileReq msg) throws Exception {
-        if (msg != null) {
-            ReqDispatcher.dispatch(ctx, msg);
+    public void channelRead0(ChannelHandlerContext ctx, ByteBuf msg) throws Exception {
+        int len = msg.readableBytes();
+        msg.markReaderIndex();
+        byte[] prefixBytes = new byte[ConstUtil.sender_req_prefix_len];
+        msg.readBytes(prefixBytes);
+        if (ConstUtil.sender_req_prefix.equals(new String(prefixBytes, CharsetUtil.UTF_8))){
+            byte[] reqBytes = new byte[len - ConstUtil.sender_req_prefix_len];
+            msg.readBytes(reqBytes);
+            SenderMsg.Req req = SenderMsg.Req.parseFrom(reqBytes);
+            System.out.println(req);
+            long cacheDataPosistion = BFileUtil.getCacheDataPosistion(BFileUtil.getTmpCacheFileFullPath(req.getFilepath()));
+
+            ctx.write(Unpooled.wrappedBuffer(ConstUtil.sender_req_write_position_prefix.getBytes(CharsetUtil.UTF_8)));
+            ctx.write(Unpooled.wrappedBuffer(String.valueOf(cacheDataPosistion).getBytes(CharsetUtil.UTF_8)));
+            ctx.writeAndFlush(Unpooled.wrappedBuffer(ConstUtil.delimiter.getBytes(CharsetUtil.UTF_8)));
+
+        }else {
+            msg.resetReaderIndex();
+            byte[] data = new byte[msg.readableBytes()];
+            msg.readBytes(data);
+            ctx.fireChannelRead(Unpooled.wrappedBuffer(data));
         }
     }
-
 
     @Override
     public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) {
@@ -61,10 +83,10 @@ public class FileServerHandler extends SimpleChannelInboundHandler<BFileMsg.BFil
         }
     }
 
-
     private void writeChunk(ChannelHandlerContext ctx, RandomAccessFile raf, int pos, int length) {
         ctx.write(new DefaultFileRegion(raf.getChannel(), pos, length));
         ctx.writeAndFlush(ConstUtil.delimiter);
     }
+
 }
 

@@ -26,6 +26,7 @@ import io.netty.channel.*;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioSocketChannel;
+import io.netty.handler.codec.protobuf.ProtobufEncoder;
 import io.netty.handler.ssl.SslContext;
 import io.netty.handler.ssl.SslContextBuilder;
 import io.netty.handler.ssl.SslHandler;
@@ -76,6 +77,9 @@ public final class FileClient {
                             if (sslCtx != null) {
                                 p.addLast(sslCtx.newHandler(ch.alloc()));
                             }
+
+//                            // outbound(BFileReq)
+//                            p.addLast(new ProtobufEncoder());
 
                             // outbound (default ByteBuf)
                             // no encoder, direct send ByteBuf

@@ -19,6 +19,7 @@ import com.laiyz.client.ChunkedReadHandler;
 import com.laiyz.client.base.ClientCmdRegister;
 import com.laiyz.config.Config;
 import com.laiyz.proto.BFileMsg;
+import com.laiyz.proto.SenderMsg;
 import com.laiyz.server.base.CmdRegister;
 import com.laiyz.util.ConstUtil;
 import io.netty.bootstrap.ServerBootstrap;
@@ -90,9 +91,10 @@ public final class FileServer {
                             ByteBuf delimiter = Unpooled.copiedBuffer(ConstUtil.delimiter.getBytes(CharsetUtil.UTF_8));
                             // inbound frameLen = chunkSize[default: 8192] + BFileRsp header)
 //                            p.addLast(new DelimiterBasedFrameDecoder(10240, delimiter));
+
                             p.addLast(new DelimiterBasedFrameDecoder(Integer.MAX_VALUE, delimiter));
 
-
+                            p.addLast(new FileServerHandler());
                             p.addLast(new FileServerHandler2());
                         }
                     });

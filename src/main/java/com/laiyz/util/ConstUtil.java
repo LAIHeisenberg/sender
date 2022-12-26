@@ -14,6 +14,12 @@ public class ConstUtil {
 
     public static final String delimiter = "__10BBSTONE_BFILE_END01__";
 
+    public static final String sender_req_prefix = "__08SENDER_REQ_S01__";
+    public static final int sender_req_prefix_len = sender_req_prefix.getBytes(CharsetUtil.UTF_8).length;
+
+    public static final String sender_req_write_position_prefix = "__07SENDER_REQ_WRITE_POS002__";
+    public static final int sender_req_write_position_len = sender_req_write_position_prefix.getBytes(CharsetUtil.UTF_8).length;
+
     /** directory */
     public static final String BFILE_CAT_DIR = "D";
     /** file */

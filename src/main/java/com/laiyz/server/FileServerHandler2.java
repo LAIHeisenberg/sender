@@ -23,9 +23,7 @@ import lombok.extern.slf4j.Slf4j;
 public class FileServerHandler2 extends SimpleChannelInboundHandler<ByteBuf> {
 
     public void channelRead0(ChannelHandlerContext ctx, ByteBuf msg) throws Exception {
-        log.debug("server recv total readableBytes: {}", msg.readableBytes());
         RspDispatcher.dispatch(ctx, msg);
-
     }
 
 }

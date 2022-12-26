@@ -12,15 +12,13 @@ import io.netty.channel.ChannelHandlerContext;
 import io.netty.util.CharsetUtil;
 import lombok.extern.slf4j.Slf4j;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
+import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 @Slf4j
 public class FileTask implements ITask {
@@ -33,6 +31,7 @@ public class FileTask implements ITask {
     private long saveSize = 0; // saved bytes(saved to disk)
 
     private FileOutputStream fos = null;
+    private FileOutputStream tmpCacheFos = null;
 
     private BFileMsg.BFileRsp rsp = null;
 
@@ -48,7 +47,9 @@ public class FileTask implements ITask {
 
     private String clientFullPath = null;
     private String tempFullPath = null;
-//    private File tempfile = null;
+    //临时缓存文件路径,记录了当前已经写入磁盘的position,作为断点续传使用
+    private String tmpCacheFilePath = null;
+
 
     private long startTime = System.currentTimeMillis();
     // 80 means 80%, 0 means 0%
@@ -78,11 +79,18 @@ public class FileTask implements ITask {
 //            checkFileExists(this.clientFullPath);
 
             this.tempFullPath = BFileUtil.getClientTempFileFullPath(clientFullPath);
+            this.tmpCacheFilePath = BFileUtil.getTmpCacheFileFullPath(clientFullPath);
+
+//            this.tempFullPath = BFileUtil.getClientTempFileFullPath();
 //            checkFileExists(this.tempFullPath);
 
 //            this.tempfile = new File(this.tempFullPath);
 
             fos = new FileOutputStream(new File(this.tempFullPath), true);
+            if (Objects.nonNull(this.tmpCacheFilePath)){
+                tmpCacheFos = new FileOutputStream(new File(this.tmpCacheFilePath), false);
+            }
+
         } catch (FileNotFoundException e) {
             log.error(String.format("File Not Found. clientFullPath: %s, tempFullPath: %s", this.clientFullPath, this.tempFullPath), e);
         }
@@ -106,6 +114,7 @@ public class FileTask implements ITask {
 //        log.info("recv file data len: {}, progress: {}/{}({}%) avg speed:{}MB/s", len, recvSize, fileSize, Math.floor((recvSize*1d/fileSize*1d) * 10000)/100, avgSpeed);
 
         String resp = String.format("recv file data, progress: %s/%s(%s) avg speed:%s", recvSize, fileSize, Math.floor((recvSize*1d/fileSize*1d) * 10000)/100, calcAvgSpeed(recvSize, rsp.getReqTs()));
+
         ctx.write(Unpooled.wrappedBuffer(ConstUtil.bfile_info_prefix.getBytes(CharsetUtil.UTF_8)));
         ctx.writeAndFlush(Unpooled.wrappedBuffer(resp.getBytes(CharsetUtil.UTF_8)));
 
@@ -124,6 +133,7 @@ public class FileTask implements ITask {
             }
             saveSize += spos;
             log.info("saveOK, saveSize: {}, recvSize: {}, spos: {}, len: {}", saveSize, recvSize, spos, len);
+            saveTmpCacheToDisk(saveSize);
             resetSbuf();
         }
         // saveOK, and all bytes received
@@ -136,6 +146,7 @@ public class FileTask implements ITask {
             log.debug("clientFullPath: {}, tempFullPath: {}", clientFullPath, tempFullPath);
             if (rsp.getChecksum().equals(checkSum)) {
                 BFileUtil.renameCliTempFile(new File(this.tempFullPath), clientFullPath);
+                BFileUtil.deleteTmpCacheFile(this.tmpCacheFilePath);
                 log.debug("temp file rename OK.");
             }
             long endTime = System.currentTimeMillis();
@@ -201,6 +212,18 @@ public class FileTask implements ITask {
         }
     }
 
+
+    private void saveTmpCacheToDisk(Long saveSize){
+        if (this.tmpCacheFos == null){
+            return;
+        }
+        try {
+            this.tmpCacheFos.write(("\r"+saveSize).getBytes(CharsetUtil.UTF_8));
+        } catch (IOException e) {
+            log.error("wrote tmp cache to disk error.", e);
+        }
+    }
+
     private void resetSbuf() {
         spos = 0;
     }
@@ -208,6 +231,9 @@ public class FileTask implements ITask {
     private void closeFos() {
         try {
             fos.close();
+            if (tmpCacheFos != null){
+                tmpCacheFos.close();
+            }
         } catch (IOException e) {
             e.printStackTrace();
         }

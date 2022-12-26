@@ -6,19 +6,20 @@ import com.laiyz.comm.BFileInfo;
 import com.laiyz.comm.BFileTreeNode;
 import com.laiyz.config.Config;
 import com.laiyz.proto.BFileMsg;
+import com.laiyz.proto.SenderMsg;
 import com.twmacinta.util.MD5;
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.Unpooled;
+import io.netty.util.CharsetUtil;
+import io.netty.util.internal.StringUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 
-import java.io.File;
-import java.io.IOException;
+import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
+import java.util.function.Consumer;
 import java.util.regex.Matcher;
 
 @Slf4j
@@ -351,6 +352,22 @@ public class BFileUtil {
         return clientFullPath + Config.tempFilePostfix();
     }
 
+    public static String getTmpCacheFileFullPath(String filePath){
+        if (isDir(filePath)) return null;
+        StringBuffer sbf = new StringBuffer(filePath);
+        int i = filePath.lastIndexOf(File.separator);
+        return sbf.insert(i+1,".tmp_cache_").toString();
+    }
+
+    public static void main(String[] args){
+
+        String filePath = "/home/laiyz/下载/mysql.tar";
+        System.out.println(getTmpCacheFileFullPath(filePath));
+
+
+    }
+
+
     /**
      * @param serverRelativeFile
      * @return
@@ -385,6 +402,50 @@ public class BFileUtil {
      */
     public static void renameCliTempFile(File tmpFile, String clipath) {
         tmpFile.renameTo(new File(clipath));
+    }
+
+    public static void deleteTmpCacheFile(String tmpCachePath){
+        try {
+            new File(tmpCachePath).delete();
+        }catch (Exception e){e.printStackTrace();}
+    }
+
+    public static long getCacheDataPosistion(String tmpCachePath){
+        tmpCachePath = getClientFullPathWithCheck(tmpCachePath);
+        FileReader fileReader = null;
+        BufferedReader bufferedReader = null;
+        try {
+            fileReader = new FileReader(new File(tmpCachePath));
+            bufferedReader = new BufferedReader(fileReader);
+            Optional<String> max = bufferedReader.lines().max((o1, o2) -> {
+                long a = 0l;
+                try {
+                    a = Long.parseLong(o1);
+                } catch (Exception e) {
+                }
+                long b = 0l;
+                try {
+                    b = Long.parseLong(o2);
+                } catch (Exception e) {
+                }
+                return a >= b ? 1 : -1;
+            });
+            return Long.parseLong(max.orElse("0"));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }finally {
+            try {
+                if (bufferedReader != null){
+                    bufferedReader.close();
+                }
+                if (fileReader != null){
+                    fileReader.close();
+                }
+            }catch (Exception e){
+
+            }
+        }
+        return 0;
     }
 
     /**
@@ -508,6 +569,17 @@ public class BFileUtil {
      */
     public static BFileMsg.BFileReq buildReq(String cmd, String filepath) {
         BFileMsg.BFileReq req = BFileMsg.BFileReq.newBuilder()
+                .setId(getReqId(filepath))
+                .setCmd(cmd)
+                .setFilepath(filepath)
+                .setTs(System.currentTimeMillis())
+                .build();
+
+        return req;
+    }
+
+    public static SenderMsg.Req buildSenderReq(String cmd, String filepath) {
+        SenderMsg.Req req = SenderMsg.Req.newBuilder()
                 .setId(getReqId(filepath))
                 .setCmd(cmd)
                 .setFilepath(filepath)

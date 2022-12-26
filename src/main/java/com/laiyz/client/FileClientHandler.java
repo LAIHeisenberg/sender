@@ -4,6 +4,7 @@ import com.laiyz.client.base.RspDispatcher;
 import com.laiyz.comm.BFileCmd;
 import com.laiyz.config.Config;
 import com.laiyz.proto.BFileMsg;
+import com.laiyz.proto.SenderMsg;
 import com.laiyz.util.BByteUtil;
 import com.laiyz.util.BFileUtil;
 import com.laiyz.util.ConstUtil;
@@ -19,6 +20,7 @@ import lombok.extern.slf4j.Slf4j;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.RandomAccessFile;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
@@ -38,11 +40,13 @@ public class FileClientHandler extends SimpleChannelInboundHandler<ByteBuf> {
     public void channelActive(ChannelHandlerContext ctx) throws Exception {
         super.channelActive(ctx);
         // req file list
-//        BFileMsg.BFileReq req = BFileUtil.buildReq(BFileCmd.REQ_LIST, serverRelativeFile);
 
-//        ctx.write(req);
+        SenderMsg.Req req = BFileUtil.buildSenderReq(BFileCmd.REQ_UPLOAD, this.filePath);
 
-//        ctx.writeAndFlush(Unpooled.wrappedBuffer(ConstUtil.delimiter.getBytes(CharsetUtil.UTF_8)));
+        ctx.write(Unpooled.wrappedBuffer(ConstUtil.sender_req_prefix.getBytes(CharsetUtil.UTF_8)));
+        ctx.write(Unpooled.wrappedBuffer(req.toByteArray()));
+        ctx.writeAndFlush(Unpooled.wrappedBuffer(ConstUtil.delimiter.getBytes(CharsetUtil.UTF_8)));
+
 
         sendFile(ctx, this.filePath, System.currentTimeMillis());
 
@@ -65,12 +69,13 @@ public class FileClientHandler extends SimpleChannelInboundHandler<ByteBuf> {
             byte[] b = new byte[subLen];
             msg.readBytes(b);
             String result = BByteUtil.toStr(b);
-            log.info(result);
+            System.out.print("\r"+result);
+//            log.info(result);
 //            if ("all completed".equals(result)){
-////                System.exit(0);
-////            }
+//                System.exit(0);
+//            }
         }
-//        RspDispatcher.dispatch(ctx, msg);
+
     }
 
 

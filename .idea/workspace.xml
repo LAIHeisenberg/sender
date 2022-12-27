@@ -2,29 +2,25 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="5e2ce149-97ba-4a89-8ac9-04cbd38fb489" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/laiyz/proto/SenderMsg.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/laiyz/proto/SenderMsg.proto" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/laiyz/util/ThreadPoolUtil.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/laiyz/client/ClientStarter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/laiyz/client/ClientStarter.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/laiyz/client/FileClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/laiyz/client/FileClient.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/laiyz/client/FileClientHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/laiyz/client/FileClientHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/laiyz/client/base/FileRspHelper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/laiyz/client/base/FileRspHelper.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/laiyz/client/task/impl/FileTask.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/laiyz/client/task/impl/FileTask.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/laiyz/server/FileServer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/laiyz/server/FileServer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/laiyz/comm/BFileCmd.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/laiyz/comm/BFileCmd.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/laiyz/proto/SenderMsg.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/laiyz/proto/SenderMsg.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/laiyz/proto/SenderMsg.proto" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/laiyz/proto/SenderMsg.proto" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/laiyz/server/FileServerHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/laiyz/server/FileServerHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/laiyz/server/FileServerHandler2.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/laiyz/server/FileServerHandler2.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/laiyz/util/BFileUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/laiyz/util/BFileUtil.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/laiyz/util/ConstUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/laiyz/util/ConstUtil.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/config.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/config.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/laiyz/client/ClientStarter.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/laiyz/client/ClientStarter.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/laiyz/client/FileClient$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/laiyz/client/FileClient$1.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/laiyz/client/FileClient.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/laiyz/client/FileClient.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/laiyz/client/FileClientHandler.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/laiyz/client/FileClientHandler.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/laiyz/client/base/FileRspHelper.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/laiyz/client/base/FileRspHelper.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/laiyz/client/task/impl/FileTask.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/laiyz/client/task/impl/FileTask.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/laiyz/server/FileServer$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/laiyz/server/FileServer$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/laiyz/server/FileServer.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/laiyz/server/FileServer.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/laiyz/comm/BFileCmd.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/laiyz/comm/BFileCmd.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/laiyz/server/FileServerHandler.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/laiyz/server/FileServerHandler.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/laiyz/server/FileServerHandler2.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/laiyz/server/FileServerHandler2.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/laiyz/util/BFileUtil.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/laiyz/util/BFileUtil.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/laiyz/util/ConstUtil.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/laiyz/util/ConstUtil.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/config.properties" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/config.properties" afterDir="false" />
@@ -127,7 +123,8 @@
       <workItem from="1671799144185" duration="486000" />
       <workItem from="1671850432354" duration="12659000" />
       <workItem from="1672018611113" duration="25419000" />
-      <workItem from="1672048705609" duration="348000" />
+      <workItem from="1672048705609" duration="682000" />
+      <workItem from="1672103919371" duration="25851000" />
     </task>
     <servers />
   </component>
@@ -147,54 +144,54 @@
       <screen x="74" y="27" width="1846" height="1053" />
     </state>
     <state x="805" y="261" width="374" height="592" key="#com.intellij.ide.util.MemberChooser/74.27.1846.1053@74.27.1846.1053" timestamp="1671616695277" />
-    <state x="1177" y="334" key="#xdebugger.evaluate" timestamp="1672046363532">
+    <state x="720" y="264" key="#xdebugger.evaluate" timestamp="1672112792802">
       <screen x="74" y="27" width="1846" height="1053" />
     </state>
-    <state x="1177" y="334" key="#xdebugger.evaluate/74.27.1846.1053@74.27.1846.1053" timestamp="1672046363532" />
-    <state x="174" y="127" width="1646" height="853" key="DiffContextDialog" timestamp="1672042460274">
+    <state x="720" y="264" key="#xdebugger.evaluate/74.27.1846.1053@74.27.1846.1053" timestamp="1672112792802" />
+    <state x="174" y="127" width="1646" height="853" key="DiffContextDialog" timestamp="1672124415381">
       <screen x="74" y="27" width="1846" height="1053" />
     </state>
-    <state x="174" y="127" width="1646" height="853" key="DiffContextDialog/74.27.1846.1053@74.27.1846.1053" timestamp="1672042460274" />
-    <state width="1846" height="342" key="GridCell.Tab.0.bottom" timestamp="1672048668602">
+    <state x="174" y="127" width="1646" height="853" key="DiffContextDialog/74.27.1846.1053@74.27.1846.1053" timestamp="1672124415381" />
+    <state width="1846" height="384" key="GridCell.Tab.0.bottom" timestamp="1672135439323">
       <screen x="74" y="27" width="1846" height="1053" />
     </state>
-    <state width="1846" height="342" key="GridCell.Tab.0.bottom/74.27.1846.1053@74.27.1846.1053" timestamp="1672048668602" />
-    <state width="1846" height="342" key="GridCell.Tab.0.center" timestamp="1672048668602">
+    <state width="1846" height="384" key="GridCell.Tab.0.bottom/74.27.1846.1053@74.27.1846.1053" timestamp="1672135439323" />
+    <state width="1846" height="384" key="GridCell.Tab.0.center" timestamp="1672135439323">
       <screen x="74" y="27" width="1846" height="1053" />
     </state>
-    <state width="1846" height="342" key="GridCell.Tab.0.center/74.27.1846.1053@74.27.1846.1053" timestamp="1672048668602" />
-    <state width="1846" height="342" key="GridCell.Tab.0.left" timestamp="1672048668602">
+    <state width="1846" height="384" key="GridCell.Tab.0.center/74.27.1846.1053@74.27.1846.1053" timestamp="1672135439323" />
+    <state width="1846" height="384" key="GridCell.Tab.0.left" timestamp="1672135439323">
       <screen x="74" y="27" width="1846" height="1053" />
     </state>
-    <state width="1846" height="342" key="GridCell.Tab.0.left/74.27.1846.1053@74.27.1846.1053" timestamp="1672048668602" />
-    <state width="1846" height="342" key="GridCell.Tab.0.right" timestamp="1672048668602">
+    <state width="1846" height="384" key="GridCell.Tab.0.left/74.27.1846.1053@74.27.1846.1053" timestamp="1672135439323" />
+    <state width="1846" height="384" key="GridCell.Tab.0.right" timestamp="1672135439323">
       <screen x="74" y="27" width="1846" height="1053" />
     </state>
-    <state width="1846" height="342" key="GridCell.Tab.0.right/74.27.1846.1053@74.27.1846.1053" timestamp="1672048668602" />
-    <state width="1846" height="451" key="GridCell.Tab.1.bottom" timestamp="1672048668601">
+    <state width="1846" height="384" key="GridCell.Tab.0.right/74.27.1846.1053@74.27.1846.1053" timestamp="1672135439323" />
+    <state width="1846" height="384" key="GridCell.Tab.1.bottom" timestamp="1672135439279">
       <screen x="74" y="27" width="1846" height="1053" />
     </state>
-    <state width="1846" height="451" key="GridCell.Tab.1.bottom/74.27.1846.1053@74.27.1846.1053" timestamp="1672048668601" />
-    <state width="1846" height="451" key="GridCell.Tab.1.center" timestamp="1672048668601">
+    <state width="1846" height="384" key="GridCell.Tab.1.bottom/74.27.1846.1053@74.27.1846.1053" timestamp="1672135439279" />
+    <state width="1846" height="384" key="GridCell.Tab.1.center" timestamp="1672135439279">
       <screen x="74" y="27" width="1846" height="1053" />
     </state>
-    <state width="1846" height="451" key="GridCell.Tab.1.center/74.27.1846.1053@74.27.1846.1053" timestamp="1672048668601" />
-    <state width="1846" height="451" key="GridCell.Tab.1.left" timestamp="1672048668601">
+    <state width="1846" height="384" key="GridCell.Tab.1.center/74.27.1846.1053@74.27.1846.1053" timestamp="1672135439279" />
+    <state width="1846" height="384" key="GridCell.Tab.1.left" timestamp="1672135439279">
       <screen x="74" y="27" width="1846" height="1053" />
     </state>
-    <state width="1846" height="451" key="GridCell.Tab.1.left/74.27.1846.1053@74.27.1846.1053" timestamp="1672048668601" />
-    <state width="1846" height="451" key="GridCell.Tab.1.right" timestamp="1672048668601">
+    <state width="1846" height="384" key="GridCell.Tab.1.left/74.27.1846.1053@74.27.1846.1053" timestamp="1672135439279" />
+    <state width="1846" height="384" key="GridCell.Tab.1.right" timestamp="1672135439279">
       <screen x="74" y="27" width="1846" height="1053" />
     </state>
-    <state width="1846" height="451" key="GridCell.Tab.1.right/74.27.1846.1053@74.27.1846.1053" timestamp="1672048668601" />
+    <state width="1846" height="384" key="GridCell.Tab.1.right/74.27.1846.1053@74.27.1846.1053" timestamp="1672135439279" />
     <state x="480" y="131" width="1024" height="852" key="SettingsEditor" timestamp="1671612388937">
       <screen x="74" y="27" width="1846" height="1053" />
     </state>
     <state x="480" y="131" width="1024" height="852" key="SettingsEditor/74.27.1846.1053@74.27.1846.1053" timestamp="1671612388937" />
-    <state width="923" height="526" key="XDebugger.FullValuePopup" timestamp="1672046355866">
+    <state width="923" height="526" key="XDebugger.FullValuePopup" timestamp="1672112852777">
       <screen x="74" y="27" width="1846" height="1053" />
     </state>
-    <state width="923" height="526" key="XDebugger.FullValuePopup/74.27.1846.1053@74.27.1846.1053" timestamp="1672046355866" />
+    <state width="923" height="526" key="XDebugger.FullValuePopup/74.27.1846.1053@74.27.1846.1053" timestamp="1672112852777" />
     <state x="651" y="381" key="com.intellij.ide.util.TipDialog" timestamp="1671673275953">
       <screen x="74" y="27" width="1846" height="1053" />
     </state>
@@ -203,20 +200,9 @@
       <screen x="74" y="27" width="1846" height="1053" />
     </state>
     <state x="567" y="197" width="860" height="712" key="find.popup/74.27.1846.1053@74.27.1846.1053" timestamp="1671698431796" />
-    <state x="660" y="259" width="672" height="678" key="search.everywhere.popup" timestamp="1671776344062">
+    <state x="660" y="259" width="672" height="678" key="search.everywhere.popup" timestamp="1672110894518">
       <screen x="74" y="27" width="1846" height="1053" />
     </state>
-    <state x="660" y="259" width="672" height="678" key="search.everywhere.popup/74.27.1846.1053@74.27.1846.1053" timestamp="1671776344062" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/com/laiyz/util/BFileUtil.java</url>
-          <line>414</line>
-          <option name="timeStamp" value="32" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
+    <state x="660" y="259" width="672" height="678" key="search.everywhere.popup/74.27.1846.1053@74.27.1846.1053" timestamp="1672110894518" />
   </component>
 </project>

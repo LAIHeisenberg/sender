@@ -2,8 +2,10 @@ package com.laiyz.client.task.impl;
 
 import com.laiyz.client.task.ITask;
 import com.laiyz.client.task.TaskListener;
+import com.laiyz.comm.BFileCmd;
 import com.laiyz.comm.StatusEnum;
 import com.laiyz.proto.BFileMsg;
+import com.laiyz.proto.SenderMsg;
 import com.laiyz.util.BFileUtil;
 import com.laiyz.util.ConstUtil;
 import io.netty.buffer.ByteBuf;
@@ -16,6 +18,7 @@ import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.text.DecimalFormat;
+import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -28,10 +31,9 @@ public class FileTask implements ITask {
     private String checksum = null;
     private long fileSize = 0; // total bytes
     private long recvSize = 0; // recv bytes(still in sbuf)
-    private long saveSize = 0; // saved bytes(saved to disk)
+    private long currRecvSize = 0;
 
     private FileOutputStream fos = null;
-    private FileOutputStream tmpCacheFos = null;
 
     private BFileMsg.BFileRsp rsp = null;
 
@@ -87,13 +89,17 @@ public class FileTask implements ITask {
 //            this.tempfile = new File(this.tempFullPath);
 
             fos = new FileOutputStream(new File(this.tempFullPath), true);
-            if (Objects.nonNull(this.tmpCacheFilePath)){
-                tmpCacheFos = new FileOutputStream(new File(this.tmpCacheFilePath), false);
-            }
+            this.recvSize = BFileUtil.getTmpFileLength(rsp.getFilepath());
 
         } catch (FileNotFoundException e) {
             log.error(String.format("File Not Found. clientFullPath: %s, tempFullPath: %s", this.clientFullPath, this.tempFullPath), e);
         }
+    }
+
+    public void resetRecvSize(long recvSize){
+        this.recvSize = recvSize;
+        this.spos = 0;
+        this.currRecvSize = 0;
     }
 
     @Override
@@ -104,25 +110,37 @@ public class FileTask implements ITask {
             log.warn("recv file data is 0.");
             return StatusEnum.NO_DATA;
         }
+
         checkSBufSpace(len);
         // append data to storage buffer(sbuf)
         System.arraycopy(fileData, 0, sbuf, spos, len);
         // increase sbuf next write pos
         spos += len;
         recvSize += len;
+        currRecvSize += len;
 
 //        log.info("recv file data len: {}, progress: {}/{}({}%) avg speed:{}MB/s", len, recvSize, fileSize, Math.floor((recvSize*1d/fileSize*1d) * 10000)/100, avgSpeed);
+//        String resp = String.format("recv file data, progress: %s/%s(%s) avg speed:%s", recvSize, fileSize, Math.floor((recvSize*1d/fileSize*1d) * 10000)/100, calcAvgSpeed(recvSize, rsp.getReqTs()));
 
-        String resp = String.format("recv file data, progress: %s/%s(%s) avg speed:%s", recvSize, fileSize, Math.floor((recvSize*1d/fileSize*1d) * 10000)/100, calcAvgSpeed(recvSize, rsp.getReqTs()));
-
-        ctx.write(Unpooled.wrappedBuffer(ConstUtil.bfile_info_prefix.getBytes(CharsetUtil.UTF_8)));
-        ctx.writeAndFlush(Unpooled.wrappedBuffer(resp.getBytes(CharsetUtil.UTF_8)));
+        ctx.write(Unpooled.wrappedBuffer(ConstUtil.sender_req_prefix.getBytes(CharsetUtil.UTF_8)));
+        SenderMsg.Rsp senderMsgRsp = SenderMsg.Rsp.newBuilder()
+                .setId(rsp.getId())
+                .setCmd(BFileCmd.RSP_UPLOAD_PROGRESS)
+                .setFileSize(rsp.getFileSize())
+                .setReqTs(rsp.getReqTs())
+                .setRecvSize(recvSize)
+                .setCurrRecvSize(currRecvSize)
+                .build();
+        ctx.write(Unpooled.wrappedBuffer(senderMsgRsp.toByteArray()));
+        ctx.writeAndFlush(Unpooled.wrappedBuffer(ConstUtil.delimiter.getBytes(CharsetUtil.UTF_8)));
 
         boolean saveOK;
+        long saveSize = 0l;
         // sbuf full or all file data received
         if (spos >= SBUF_SIZE || recvSize == fileSize) {
             // do save file data to disk
-            saveOK = saveToDisk();
+            saveSize = saveToDisk();
+            saveOK = saveSize > 0;
             // reset recvSize, sbuf
             if (!saveOK) {
                 log.warn("save file data error, recvSize: {}, spos: {}, len: ", recvSize, spos, len);
@@ -131,9 +149,7 @@ public class FileTask implements ITask {
                 //  or write down break point and skip this file, after all file downloaded, report this situation
                 return StatusEnum.ERR_SAVE_DATA;
             }
-            saveSize += spos;
             log.info("saveOK, saveSize: {}, recvSize: {}, spos: {}, len: {}", saveSize, recvSize, spos, len);
-            saveTmpCacheToDisk(saveSize);
             resetSbuf();
         }
         // saveOK, and all bytes received
@@ -146,13 +162,12 @@ public class FileTask implements ITask {
             log.debug("clientFullPath: {}, tempFullPath: {}", clientFullPath, tempFullPath);
             if (rsp.getChecksum().equals(checkSum)) {
                 BFileUtil.renameCliTempFile(new File(this.tempFullPath), clientFullPath);
-                BFileUtil.deleteTmpCacheFile(this.tmpCacheFilePath);
                 log.debug("temp file rename OK.");
             }
-            long endTime = System.currentTimeMillis();
+            long endTime = Instant.now().getEpochSecond();
             log.debug("============ endTime: {}==========", endTime);
 
-            long costTime = (endTime - rsp.getReqTs()) / 1000;
+            long costTime = (endTime - rsp.getReqTs());
             log.info(">>>>>>>>>>>>>>> file transfer cost time: {} sec. <<<<<<<<<<<<<<<<<", costTime);
             for (TaskListener listener : listener) {
                 listener.onCompleted(rsp);
@@ -194,7 +209,7 @@ public class FileTask implements ITask {
         }
     }
 
-    private boolean saveToDisk() {
+    private long saveToDisk() {
         try {
             // sbuf full data
             if (spos >= SBUF_SIZE) {
@@ -204,23 +219,12 @@ public class FileTask implements ITask {
                 System.arraycopy(sbuf, 0, wdata, 0, spos);
                 fos.write(wdata);
             }
+
             log.debug("wrote data to disk ...");
-            return true;
+            return fos.getChannel().size();
         } catch (IOException e) {
             log.error("wrote data to disk error.", e);
-            return false;
-        }
-    }
-
-
-    private void saveTmpCacheToDisk(Long saveSize){
-        if (this.tmpCacheFos == null){
-            return;
-        }
-        try {
-            this.tmpCacheFos.write(("\r"+saveSize).getBytes(CharsetUtil.UTF_8));
-        } catch (IOException e) {
-            log.error("wrote tmp cache to disk error.", e);
+            return 0;
         }
     }
 
@@ -231,9 +235,6 @@ public class FileTask implements ITask {
     private void closeFos() {
         try {
             fos.close();
-            if (tmpCacheFos != null){
-                tmpCacheFos.close();
-            }
         } catch (IOException e) {
             e.printStackTrace();
         }

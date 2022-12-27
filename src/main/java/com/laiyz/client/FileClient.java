@@ -26,6 +26,7 @@ import io.netty.channel.*;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioSocketChannel;
+import io.netty.handler.codec.DelimiterBasedFrameDecoder;
 import io.netty.handler.codec.protobuf.ProtobufEncoder;
 import io.netty.handler.ssl.SslContext;
 import io.netty.handler.ssl.SslContextBuilder;
@@ -77,7 +78,8 @@ public final class FileClient {
                             if (sslCtx != null) {
                                 p.addLast(sslCtx.newHandler(ch.alloc()));
                             }
-
+                            ByteBuf delimiter = Unpooled.copiedBuffer(ConstUtil.delimiter.getBytes(CharsetUtil.UTF_8));
+                            p.addLast(new DelimiterBasedFrameDecoder(1024, delimiter));
 //                            // outbound(BFileReq)
 //                            p.addLast(new ProtobufEncoder());
 

@@ -352,6 +352,15 @@ public class BFileUtil {
         return clientFullPath + Config.tempFilePostfix();
     }
 
+    public static long getTmpFileLength(String filePath){
+        String clientFullPathWithCheck = BFileUtil.getClientFullPathWithCheck(filePath);
+        filePath = BFileUtil.getClientTempFileFullPath(clientFullPathWithCheck);
+        try {
+            return new File(filePath).length();
+        }catch (Exception e){}
+        return 0L;
+    }
+
     public static String getTmpCacheFileFullPath(String filePath){
         if (isDir(filePath)) return null;
         StringBuffer sbf = new StringBuffer(filePath);
@@ -402,50 +411,6 @@ public class BFileUtil {
      */
     public static void renameCliTempFile(File tmpFile, String clipath) {
         tmpFile.renameTo(new File(clipath));
-    }
-
-    public static void deleteTmpCacheFile(String tmpCachePath){
-        try {
-            new File(tmpCachePath).delete();
-        }catch (Exception e){e.printStackTrace();}
-    }
-
-    public static long getCacheDataPosistion(String tmpCachePath){
-        tmpCachePath = getClientFullPathWithCheck(tmpCachePath);
-        FileReader fileReader = null;
-        BufferedReader bufferedReader = null;
-        try {
-            fileReader = new FileReader(new File(tmpCachePath));
-            bufferedReader = new BufferedReader(fileReader);
-            Optional<String> max = bufferedReader.lines().max((o1, o2) -> {
-                long a = 0l;
-                try {
-                    a = Long.parseLong(o1);
-                } catch (Exception e) {
-                }
-                long b = 0l;
-                try {
-                    b = Long.parseLong(o2);
-                } catch (Exception e) {
-                }
-                return a >= b ? 1 : -1;
-            });
-            return Long.parseLong(max.orElse("0"));
-        } catch (Exception e) {
-            e.printStackTrace();
-        }finally {
-            try {
-                if (bufferedReader != null){
-                    bufferedReader.close();
-                }
-                if (fileReader != null){
-                    fileReader.close();
-                }
-            }catch (Exception e){
-
-            }
-        }
-        return 0;
     }
 
     /**

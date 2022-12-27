@@ -63,7 +63,7 @@ public final class SenderMsg {
   /**
    * Protobuf type {@code com.laiyz.proto.Req}
    */
-  public static final class Req extends
+  public  static final class Req extends
       com.google.protobuf.GeneratedMessageV3 implements
       // @@protoc_insertion_point(message_implements:com.laiyz.proto.Req)
       ReqOrBuilder {
@@ -90,6 +90,66 @@ public final class SenderMsg {
     getUnknownFields() {
       return this.unknownFields;
     }
+    private Req(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      this();
+      if (extensionRegistry == null) {
+        throw new java.lang.NullPointerException();
+      }
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            case 10: {
+              java.lang.String s = input.readStringRequireUtf8();
+
+              id_ = s;
+              break;
+            }
+            case 18: {
+              java.lang.String s = input.readStringRequireUtf8();
+
+              cmd_ = s;
+              break;
+            }
+            case 26: {
+              java.lang.String s = input.readStringRequireUtf8();
+
+              filepath_ = s;
+              break;
+            }
+            case 32: {
+
+              ts_ = input.readUInt64();
+              break;
+            }
+            default: {
+              if (!parseUnknownField(
+                  input, unknownFields, extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e).setUnfinishedMessage(this);
+      } finally {
+        this.unknownFields = unknownFields.build();
+        makeExtensionsImmutable();
+      }
+    }
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
       return com.laiyz.proto.SenderMsg.internal_static_com_laiyz_proto_Req_descriptor;
@@ -104,13 +164,11 @@ public final class SenderMsg {
     }
 
     public static final int ID_FIELD_NUMBER = 1;
-    @SuppressWarnings("serial")
-    private volatile java.lang.Object id_ = "";
+    private volatile java.lang.Object id_;
     /**
      * <code>string id = 1;</code>
      * @return The id.
      */
-    @java.lang.Override
     public java.lang.String getId() {
       java.lang.Object ref = id_;
       if (ref instanceof java.lang.String) {
@@ -127,7 +185,6 @@ public final class SenderMsg {
      * <code>string id = 1;</code>
      * @return The bytes for id.
      */
-    @java.lang.Override
     public com.google.protobuf.ByteString
         getIdBytes() {
       java.lang.Object ref = id_;
@@ -143,13 +200,11 @@ public final class SenderMsg {
     }
 
     public static final int CMD_FIELD_NUMBER = 2;
-    @SuppressWarnings("serial")
-    private volatile java.lang.Object cmd_ = "";
+    private volatile java.lang.Object cmd_;
     /**
      * <code>string cmd = 2;</code>
      * @return The cmd.
      */
-    @java.lang.Override
     public java.lang.String getCmd() {
       java.lang.Object ref = cmd_;
       if (ref instanceof java.lang.String) {
@@ -166,7 +221,6 @@ public final class SenderMsg {
      * <code>string cmd = 2;</code>
      * @return The bytes for cmd.
      */
-    @java.lang.Override
     public com.google.protobuf.ByteString
         getCmdBytes() {
       java.lang.Object ref = cmd_;
@@ -182,13 +236,11 @@ public final class SenderMsg {
     }
 
     public static final int FILEPATH_FIELD_NUMBER = 3;
-    @SuppressWarnings("serial")
-    private volatile java.lang.Object filepath_ = "";
+    private volatile java.lang.Object filepath_;
     /**
      * <code>string filepath = 3;</code>
      * @return The filepath.
      */
-    @java.lang.Override
     public java.lang.String getFilepath() {
       java.lang.Object ref = filepath_;
       if (ref instanceof java.lang.String) {
@@ -205,7 +257,6 @@ public final class SenderMsg {
      * <code>string filepath = 3;</code>
      * @return The bytes for filepath.
      */
-    @java.lang.Override
     public com.google.protobuf.ByteString
         getFilepathBytes() {
       java.lang.Object ref = filepath_;
@@ -221,12 +272,11 @@ public final class SenderMsg {
     }
 
     public static final int TS_FIELD_NUMBER = 4;
-    private long ts_ = 0L;
+    private long ts_;
     /**
      * <code>uint64 ts = 4;</code>
      * @return The ts.
      */
-    @java.lang.Override
     public long getTs() {
       return ts_;
     }
@@ -257,7 +307,7 @@ public final class SenderMsg {
       if (ts_ != 0L) {
         output.writeUInt64(4, ts_);
       }
-      getUnknownFields().writeTo(output);
+      unknownFields.writeTo(output);
     }
 
     @java.lang.Override
@@ -279,7 +329,7 @@ public final class SenderMsg {
         size += com.google.protobuf.CodedOutputStream
           .computeUInt64Size(4, ts_);
       }
-      size += getUnknownFields().getSerializedSize();
+      size += unknownFields.getSerializedSize();
       memoizedSize = size;
       return size;
     }
@@ -302,7 +352,7 @@ public final class SenderMsg {
           .equals(other.getFilepath())) return false;
       if (getTs()
           != other.getTs()) return false;
-      if (!getUnknownFields().equals(other.getUnknownFields())) return false;
+      if (!unknownFields.equals(other.unknownFields)) return false;
       return true;
     }
 
@@ -322,7 +372,7 @@ public final class SenderMsg {
       hash = (37 * hash) + TS_FIELD_NUMBER;
       hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
           getTs());
-      hash = (29 * hash) + getUnknownFields().hashCode();
+      hash = (29 * hash) + unknownFields.hashCode();
       memoizedHashCode = hash;
       return hash;
     }
@@ -439,22 +489,30 @@ public final class SenderMsg {
 
       // Construct using com.laiyz.proto.SenderMsg.Req.newBuilder()
       private Builder() {
-
+        maybeForceBuilderInitialization();
       }
 
       private Builder(
           com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
         super(parent);
-
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessageV3
+                .alwaysUseFieldBuilders) {
+        }
       }
       @java.lang.Override
       public Builder clear() {
         super.clear();
-        bitField0_ = 0;
         id_ = "";
+
         cmd_ = "";
+
         filepath_ = "";
+
         ts_ = 0L;
+
         return this;
       }
 
@@ -481,25 +539,12 @@ public final class SenderMsg {
       @java.lang.Override
       public com.laiyz.proto.SenderMsg.Req buildPartial() {
         com.laiyz.proto.SenderMsg.Req result = new com.laiyz.proto.SenderMsg.Req(this);
-        if (bitField0_ != 0) { buildPartial0(result); }
+        result.id_ = id_;
+        result.cmd_ = cmd_;
+        result.filepath_ = filepath_;
+        result.ts_ = ts_;
         onBuilt();
         return result;
-      }
-
-      private void buildPartial0(com.laiyz.proto.SenderMsg.Req result) {
-        int from_bitField0_ = bitField0_;
-        if (((from_bitField0_ & 0x00000001) != 0)) {
-          result.id_ = id_;
-        }
-        if (((from_bitField0_ & 0x00000002) != 0)) {
-          result.cmd_ = cmd_;
-        }
-        if (((from_bitField0_ & 0x00000004) != 0)) {
-          result.filepath_ = filepath_;
-        }
-        if (((from_bitField0_ & 0x00000008) != 0)) {
-          result.ts_ = ts_;
-        }
       }
 
       @java.lang.Override
@@ -548,23 +593,20 @@ public final class SenderMsg {
         if (other == com.laiyz.proto.SenderMsg.Req.getDefaultInstance()) return this;
         if (!other.getId().isEmpty()) {
           id_ = other.id_;
-          bitField0_ |= 0x00000001;
           onChanged();
         }
         if (!other.getCmd().isEmpty()) {
           cmd_ = other.cmd_;
-          bitField0_ |= 0x00000002;
           onChanged();
         }
         if (!other.getFilepath().isEmpty()) {
           filepath_ = other.filepath_;
-          bitField0_ |= 0x00000004;
           onChanged();
         }
         if (other.getTs() != 0L) {
           setTs(other.getTs());
         }
-        this.mergeUnknownFields(other.getUnknownFields());
+        this.mergeUnknownFields(other.unknownFields);
         onChanged();
         return this;
       }
@@ -579,53 +621,19 @@ public final class SenderMsg {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws java.io.IOException {
-        if (extensionRegistry == null) {
-          throw new java.lang.NullPointerException();
-        }
+        com.laiyz.proto.SenderMsg.Req parsedMessage = null;
         try {
-          boolean done = false;
-          while (!done) {
-            int tag = input.readTag();
-            switch (tag) {
-              case 0:
-                done = true;
-                break;
-              case 10: {
-                id_ = input.readStringRequireUtf8();
-                bitField0_ |= 0x00000001;
-                break;
-              } // case 10
-              case 18: {
-                cmd_ = input.readStringRequireUtf8();
-                bitField0_ |= 0x00000002;
-                break;
-              } // case 18
-              case 26: {
-                filepath_ = input.readStringRequireUtf8();
-                bitField0_ |= 0x00000004;
-                break;
-              } // case 26
-              case 32: {
-                ts_ = input.readUInt64();
-                bitField0_ |= 0x00000008;
-                break;
-              } // case 32
-              default: {
-//                if (!super.parseUnknownField(input, extensionRegistry, tag)) {
-//                  done = true; // was an endgroup tag
-//                }
-                break;
-              } // default:
-            } // switch (tag)
-          } // while (!done)
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
         } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (com.laiyz.proto.SenderMsg.Req) e.getUnfinishedMessage();
           throw e.unwrapIOException();
         } finally {
-          onChanged();
-        } // finally
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
         return this;
       }
-      private int bitField0_;
 
       private java.lang.Object id_ = "";
       /**
@@ -668,9 +676,11 @@ public final class SenderMsg {
        */
       public Builder setId(
           java.lang.String value) {
-        if (value == null) { throw new NullPointerException(); }
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  
         id_ = value;
-        bitField0_ |= 0x00000001;
         onChanged();
         return this;
       }
@@ -679,8 +689,8 @@ public final class SenderMsg {
        * @return This builder for chaining.
        */
       public Builder clearId() {
+        
         id_ = getDefaultInstance().getId();
-        bitField0_ = (bitField0_ & ~0x00000001);
         onChanged();
         return this;
       }
@@ -691,10 +701,12 @@ public final class SenderMsg {
        */
       public Builder setIdBytes(
           com.google.protobuf.ByteString value) {
-        if (value == null) { throw new NullPointerException(); }
-        checkByteStringIsUtf8(value);
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+        
         id_ = value;
-        bitField0_ |= 0x00000001;
         onChanged();
         return this;
       }
@@ -740,9 +752,11 @@ public final class SenderMsg {
        */
       public Builder setCmd(
           java.lang.String value) {
-        if (value == null) { throw new NullPointerException(); }
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  
         cmd_ = value;
-        bitField0_ |= 0x00000002;
         onChanged();
         return this;
       }
@@ -751,8 +765,8 @@ public final class SenderMsg {
        * @return This builder for chaining.
        */
       public Builder clearCmd() {
+        
         cmd_ = getDefaultInstance().getCmd();
-        bitField0_ = (bitField0_ & ~0x00000002);
         onChanged();
         return this;
       }
@@ -763,10 +777,12 @@ public final class SenderMsg {
        */
       public Builder setCmdBytes(
           com.google.protobuf.ByteString value) {
-        if (value == null) { throw new NullPointerException(); }
-        checkByteStringIsUtf8(value);
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+        
         cmd_ = value;
-        bitField0_ |= 0x00000002;
         onChanged();
         return this;
       }
@@ -812,9 +828,11 @@ public final class SenderMsg {
        */
       public Builder setFilepath(
           java.lang.String value) {
-        if (value == null) { throw new NullPointerException(); }
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  
         filepath_ = value;
-        bitField0_ |= 0x00000004;
         onChanged();
         return this;
       }
@@ -823,8 +841,8 @@ public final class SenderMsg {
        * @return This builder for chaining.
        */
       public Builder clearFilepath() {
+        
         filepath_ = getDefaultInstance().getFilepath();
-        bitField0_ = (bitField0_ & ~0x00000004);
         onChanged();
         return this;
       }
@@ -835,10 +853,12 @@ public final class SenderMsg {
        */
       public Builder setFilepathBytes(
           com.google.protobuf.ByteString value) {
-        if (value == null) { throw new NullPointerException(); }
-        checkByteStringIsUtf8(value);
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+        
         filepath_ = value;
-        bitField0_ |= 0x00000004;
         onChanged();
         return this;
       }
@@ -848,7 +868,6 @@ public final class SenderMsg {
        * <code>uint64 ts = 4;</code>
        * @return The ts.
        */
-      @java.lang.Override
       public long getTs() {
         return ts_;
       }
@@ -860,7 +879,6 @@ public final class SenderMsg {
       public Builder setTs(long value) {
         
         ts_ = value;
-        bitField0_ |= 0x00000008;
         onChanged();
         return this;
       }
@@ -869,7 +887,7 @@ public final class SenderMsg {
        * @return This builder for chaining.
        */
       public Builder clearTs() {
-        bitField0_ = (bitField0_ & ~0x00000008);
+        
         ts_ = 0L;
         onChanged();
         return this;
@@ -907,18 +925,7 @@ public final class SenderMsg {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-        Builder builder = newBuilder();
-        try {
-          builder.mergeFrom(input, extensionRegistry);
-        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          throw e.setUnfinishedMessage(builder.buildPartial());
-        } catch (com.google.protobuf.UninitializedMessageException e) {
-          throw e.asInvalidProtocolBufferException().setUnfinishedMessage(builder.buildPartial());
-        } catch (java.io.IOException e) {
-          throw new com.google.protobuf.InvalidProtocolBufferException(e)
-              .setUnfinishedMessage(builder.buildPartial());
-        }
-        return builder.buildPartial();
+        return new Req(input, extensionRegistry);
       }
     };
 
@@ -985,49 +992,31 @@ public final class SenderMsg {
     long getFileSize();
 
     /**
-     * <code>string checksum = 5;</code>
-     * @return The checksum.
+     * <code>uint64 recvSize = 5;</code>
+     * @return The recvSize.
      */
-    java.lang.String getChecksum();
-    /**
-     * <code>string checksum = 5;</code>
-     * @return The bytes for checksum.
-     */
-    com.google.protobuf.ByteString
-        getChecksumBytes();
+    long getRecvSize();
 
     /**
-     * <code>string rspData = 6;</code>
-     * @return The rspData.
+     * <code>uint64 currRecvSize = 6;</code>
+     * @return The currRecvSize.
      */
-    java.lang.String getRspData();
-    /**
-     * <code>string rspData = 6;</code>
-     * @return The bytes for rspData.
-     */
-    com.google.protobuf.ByteString
-        getRspDataBytes();
+    long getCurrRecvSize();
 
     /**
-     * <code>bytes chunkData = 7;</code>
-     * @return The chunkData.
-     */
-    com.google.protobuf.ByteString getChunkData();
-
-    /**
-     * <code>uint64 reqTs = 8;</code>
+     * <code>uint64 reqTs = 7;</code>
      * @return The reqTs.
      */
     long getReqTs();
 
     /**
-     * <code>uint64 rspTs = 9;</code>
+     * <code>uint64 rspTs = 8;</code>
      * @return The rspTs.
      */
     long getRspTs();
 
     /**
-     * <code>uint64 accessFilePosition = 10;</code>
+     * <code>uint64 accessFilePosition = 9;</code>
      * @return The accessFilePosition.
      */
     long getAccessFilePosition();
@@ -1035,7 +1024,7 @@ public final class SenderMsg {
   /**
    * Protobuf type {@code com.laiyz.proto.Rsp}
    */
-  public static final class Rsp extends
+  public  static final class Rsp extends
       com.google.protobuf.GeneratedMessageV3 implements
       // @@protoc_insertion_point(message_implements:com.laiyz.proto.Rsp)
       RspOrBuilder {
@@ -1048,9 +1037,6 @@ public final class SenderMsg {
       id_ = "";
       cmd_ = "";
       filepath_ = "";
-      checksum_ = "";
-      rspData_ = "";
-      chunkData_ = com.google.protobuf.ByteString.EMPTY;
     }
 
     @java.lang.Override
@@ -1064,6 +1050,91 @@ public final class SenderMsg {
     public final com.google.protobuf.UnknownFieldSet
     getUnknownFields() {
       return this.unknownFields;
+    }
+    private Rsp(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      this();
+      if (extensionRegistry == null) {
+        throw new java.lang.NullPointerException();
+      }
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            case 10: {
+              java.lang.String s = input.readStringRequireUtf8();
+
+              id_ = s;
+              break;
+            }
+            case 18: {
+              java.lang.String s = input.readStringRequireUtf8();
+
+              cmd_ = s;
+              break;
+            }
+            case 26: {
+              java.lang.String s = input.readStringRequireUtf8();
+
+              filepath_ = s;
+              break;
+            }
+            case 32: {
+
+              fileSize_ = input.readUInt64();
+              break;
+            }
+            case 40: {
+
+              recvSize_ = input.readUInt64();
+              break;
+            }
+            case 48: {
+
+              currRecvSize_ = input.readUInt64();
+              break;
+            }
+            case 56: {
+
+              reqTs_ = input.readUInt64();
+              break;
+            }
+            case 64: {
+
+              rspTs_ = input.readUInt64();
+              break;
+            }
+            case 72: {
+
+              accessFilePosition_ = input.readUInt64();
+              break;
+            }
+            default: {
+              if (!parseUnknownField(
+                  input, unknownFields, extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e).setUnfinishedMessage(this);
+      } finally {
+        this.unknownFields = unknownFields.build();
+        makeExtensionsImmutable();
+      }
     }
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
@@ -1079,13 +1150,11 @@ public final class SenderMsg {
     }
 
     public static final int ID_FIELD_NUMBER = 1;
-    @SuppressWarnings("serial")
-    private volatile java.lang.Object id_ = "";
+    private volatile java.lang.Object id_;
     /**
      * <code>string id = 1;</code>
      * @return The id.
      */
-    @java.lang.Override
     public java.lang.String getId() {
       java.lang.Object ref = id_;
       if (ref instanceof java.lang.String) {
@@ -1102,7 +1171,6 @@ public final class SenderMsg {
      * <code>string id = 1;</code>
      * @return The bytes for id.
      */
-    @java.lang.Override
     public com.google.protobuf.ByteString
         getIdBytes() {
       java.lang.Object ref = id_;
@@ -1118,13 +1186,11 @@ public final class SenderMsg {
     }
 
     public static final int CMD_FIELD_NUMBER = 2;
-    @SuppressWarnings("serial")
-    private volatile java.lang.Object cmd_ = "";
+    private volatile java.lang.Object cmd_;
     /**
      * <code>string cmd = 2;</code>
      * @return The cmd.
      */
-    @java.lang.Override
     public java.lang.String getCmd() {
       java.lang.Object ref = cmd_;
       if (ref instanceof java.lang.String) {
@@ -1141,7 +1207,6 @@ public final class SenderMsg {
      * <code>string cmd = 2;</code>
      * @return The bytes for cmd.
      */
-    @java.lang.Override
     public com.google.protobuf.ByteString
         getCmdBytes() {
       java.lang.Object ref = cmd_;
@@ -1157,13 +1222,11 @@ public final class SenderMsg {
     }
 
     public static final int FILEPATH_FIELD_NUMBER = 3;
-    @SuppressWarnings("serial")
-    private volatile java.lang.Object filepath_ = "";
+    private volatile java.lang.Object filepath_;
     /**
      * <code>string filepath = 3;</code>
      * @return The filepath.
      */
-    @java.lang.Override
     public java.lang.String getFilepath() {
       java.lang.Object ref = filepath_;
       if (ref instanceof java.lang.String) {
@@ -1180,7 +1243,6 @@ public final class SenderMsg {
      * <code>string filepath = 3;</code>
      * @return The bytes for filepath.
      */
-    @java.lang.Override
     public com.google.protobuf.ByteString
         getFilepathBytes() {
       java.lang.Object ref = filepath_;
@@ -1196,134 +1258,61 @@ public final class SenderMsg {
     }
 
     public static final int FILESIZE_FIELD_NUMBER = 4;
-    private long fileSize_ = 0L;
+    private long fileSize_;
     /**
      * <code>uint64 fileSize = 4;</code>
      * @return The fileSize.
      */
-    @java.lang.Override
     public long getFileSize() {
       return fileSize_;
     }
 
-    public static final int CHECKSUM_FIELD_NUMBER = 5;
-    @SuppressWarnings("serial")
-    private volatile java.lang.Object checksum_ = "";
+    public static final int RECVSIZE_FIELD_NUMBER = 5;
+    private long recvSize_;
     /**
-     * <code>string checksum = 5;</code>
-     * @return The checksum.
+     * <code>uint64 recvSize = 5;</code>
+     * @return The recvSize.
      */
-    @java.lang.Override
-    public java.lang.String getChecksum() {
-      java.lang.Object ref = checksum_;
-      if (ref instanceof java.lang.String) {
-        return (java.lang.String) ref;
-      } else {
-        com.google.protobuf.ByteString bs = 
-            (com.google.protobuf.ByteString) ref;
-        java.lang.String s = bs.toStringUtf8();
-        checksum_ = s;
-        return s;
-      }
-    }
-    /**
-     * <code>string checksum = 5;</code>
-     * @return The bytes for checksum.
-     */
-    @java.lang.Override
-    public com.google.protobuf.ByteString
-        getChecksumBytes() {
-      java.lang.Object ref = checksum_;
-      if (ref instanceof java.lang.String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
-        checksum_ = b;
-        return b;
-      } else {
-        return (com.google.protobuf.ByteString) ref;
-      }
+    public long getRecvSize() {
+      return recvSize_;
     }
 
-    public static final int RSPDATA_FIELD_NUMBER = 6;
-    @SuppressWarnings("serial")
-    private volatile java.lang.Object rspData_ = "";
+    public static final int CURRRECVSIZE_FIELD_NUMBER = 6;
+    private long currRecvSize_;
     /**
-     * <code>string rspData = 6;</code>
-     * @return The rspData.
+     * <code>uint64 currRecvSize = 6;</code>
+     * @return The currRecvSize.
      */
-    @java.lang.Override
-    public java.lang.String getRspData() {
-      java.lang.Object ref = rspData_;
-      if (ref instanceof java.lang.String) {
-        return (java.lang.String) ref;
-      } else {
-        com.google.protobuf.ByteString bs = 
-            (com.google.protobuf.ByteString) ref;
-        java.lang.String s = bs.toStringUtf8();
-        rspData_ = s;
-        return s;
-      }
-    }
-    /**
-     * <code>string rspData = 6;</code>
-     * @return The bytes for rspData.
-     */
-    @java.lang.Override
-    public com.google.protobuf.ByteString
-        getRspDataBytes() {
-      java.lang.Object ref = rspData_;
-      if (ref instanceof java.lang.String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
-        rspData_ = b;
-        return b;
-      } else {
-        return (com.google.protobuf.ByteString) ref;
-      }
+    public long getCurrRecvSize() {
+      return currRecvSize_;
     }
 
-    public static final int CHUNKDATA_FIELD_NUMBER = 7;
-    private com.google.protobuf.ByteString chunkData_ = com.google.protobuf.ByteString.EMPTY;
+    public static final int REQTS_FIELD_NUMBER = 7;
+    private long reqTs_;
     /**
-     * <code>bytes chunkData = 7;</code>
-     * @return The chunkData.
-     */
-    @java.lang.Override
-    public com.google.protobuf.ByteString getChunkData() {
-      return chunkData_;
-    }
-
-    public static final int REQTS_FIELD_NUMBER = 8;
-    private long reqTs_ = 0L;
-    /**
-     * <code>uint64 reqTs = 8;</code>
+     * <code>uint64 reqTs = 7;</code>
      * @return The reqTs.
      */
-    @java.lang.Override
     public long getReqTs() {
       return reqTs_;
     }
 
-    public static final int RSPTS_FIELD_NUMBER = 9;
-    private long rspTs_ = 0L;
+    public static final int RSPTS_FIELD_NUMBER = 8;
+    private long rspTs_;
     /**
-     * <code>uint64 rspTs = 9;</code>
+     * <code>uint64 rspTs = 8;</code>
      * @return The rspTs.
      */
-    @java.lang.Override
     public long getRspTs() {
       return rspTs_;
     }
 
-    public static final int ACCESSFILEPOSITION_FIELD_NUMBER = 10;
-    private long accessFilePosition_ = 0L;
+    public static final int ACCESSFILEPOSITION_FIELD_NUMBER = 9;
+    private long accessFilePosition_;
     /**
-     * <code>uint64 accessFilePosition = 10;</code>
+     * <code>uint64 accessFilePosition = 9;</code>
      * @return The accessFilePosition.
      */
-    @java.lang.Override
     public long getAccessFilePosition() {
       return accessFilePosition_;
     }
@@ -1354,25 +1343,22 @@ public final class SenderMsg {
       if (fileSize_ != 0L) {
         output.writeUInt64(4, fileSize_);
       }
-      if (!getChecksumBytes().isEmpty()) {
-        com.google.protobuf.GeneratedMessageV3.writeString(output, 5, checksum_);
+      if (recvSize_ != 0L) {
+        output.writeUInt64(5, recvSize_);
       }
-      if (!getRspDataBytes().isEmpty()) {
-        com.google.protobuf.GeneratedMessageV3.writeString(output, 6, rspData_);
-      }
-      if (!chunkData_.isEmpty()) {
-        output.writeBytes(7, chunkData_);
+      if (currRecvSize_ != 0L) {
+        output.writeUInt64(6, currRecvSize_);
       }
       if (reqTs_ != 0L) {
-        output.writeUInt64(8, reqTs_);
+        output.writeUInt64(7, reqTs_);
       }
       if (rspTs_ != 0L) {
-        output.writeUInt64(9, rspTs_);
+        output.writeUInt64(8, rspTs_);
       }
       if (accessFilePosition_ != 0L) {
-        output.writeUInt64(10, accessFilePosition_);
+        output.writeUInt64(9, accessFilePosition_);
       }
-      getUnknownFields().writeTo(output);
+      unknownFields.writeTo(output);
     }
 
     @java.lang.Override
@@ -1394,29 +1380,27 @@ public final class SenderMsg {
         size += com.google.protobuf.CodedOutputStream
           .computeUInt64Size(4, fileSize_);
       }
-      if (!getChecksumBytes().isEmpty()) {
-        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(5, checksum_);
-      }
-      if (!getRspDataBytes().isEmpty()) {
-        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(6, rspData_);
-      }
-      if (!chunkData_.isEmpty()) {
+      if (recvSize_ != 0L) {
         size += com.google.protobuf.CodedOutputStream
-          .computeBytesSize(7, chunkData_);
+          .computeUInt64Size(5, recvSize_);
+      }
+      if (currRecvSize_ != 0L) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeUInt64Size(6, currRecvSize_);
       }
       if (reqTs_ != 0L) {
         size += com.google.protobuf.CodedOutputStream
-          .computeUInt64Size(8, reqTs_);
+          .computeUInt64Size(7, reqTs_);
       }
       if (rspTs_ != 0L) {
         size += com.google.protobuf.CodedOutputStream
-          .computeUInt64Size(9, rspTs_);
+          .computeUInt64Size(8, rspTs_);
       }
       if (accessFilePosition_ != 0L) {
         size += com.google.protobuf.CodedOutputStream
-          .computeUInt64Size(10, accessFilePosition_);
+          .computeUInt64Size(9, accessFilePosition_);
       }
-      size += getUnknownFields().getSerializedSize();
+      size += unknownFields.getSerializedSize();
       memoizedSize = size;
       return size;
     }
@@ -1439,19 +1423,17 @@ public final class SenderMsg {
           .equals(other.getFilepath())) return false;
       if (getFileSize()
           != other.getFileSize()) return false;
-      if (!getChecksum()
-          .equals(other.getChecksum())) return false;
-      if (!getRspData()
-          .equals(other.getRspData())) return false;
-      if (!getChunkData()
-          .equals(other.getChunkData())) return false;
+      if (getRecvSize()
+          != other.getRecvSize()) return false;
+      if (getCurrRecvSize()
+          != other.getCurrRecvSize()) return false;
       if (getReqTs()
           != other.getReqTs()) return false;
       if (getRspTs()
           != other.getRspTs()) return false;
       if (getAccessFilePosition()
           != other.getAccessFilePosition()) return false;
-      if (!getUnknownFields().equals(other.getUnknownFields())) return false;
+      if (!unknownFields.equals(other.unknownFields)) return false;
       return true;
     }
 
@@ -1471,12 +1453,12 @@ public final class SenderMsg {
       hash = (37 * hash) + FILESIZE_FIELD_NUMBER;
       hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
           getFileSize());
-      hash = (37 * hash) + CHECKSUM_FIELD_NUMBER;
-      hash = (53 * hash) + getChecksum().hashCode();
-      hash = (37 * hash) + RSPDATA_FIELD_NUMBER;
-      hash = (53 * hash) + getRspData().hashCode();
-      hash = (37 * hash) + CHUNKDATA_FIELD_NUMBER;
-      hash = (53 * hash) + getChunkData().hashCode();
+      hash = (37 * hash) + RECVSIZE_FIELD_NUMBER;
+      hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
+          getRecvSize());
+      hash = (37 * hash) + CURRRECVSIZE_FIELD_NUMBER;
+      hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
+          getCurrRecvSize());
       hash = (37 * hash) + REQTS_FIELD_NUMBER;
       hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
           getReqTs());
@@ -1486,7 +1468,7 @@ public final class SenderMsg {
       hash = (37 * hash) + ACCESSFILEPOSITION_FIELD_NUMBER;
       hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
           getAccessFilePosition());
-      hash = (29 * hash) + getUnknownFields().hashCode();
+      hash = (29 * hash) + unknownFields.hashCode();
       memoizedHashCode = hash;
       return hash;
     }
@@ -1603,28 +1585,40 @@ public final class SenderMsg {
 
       // Construct using com.laiyz.proto.SenderMsg.Rsp.newBuilder()
       private Builder() {
-
+        maybeForceBuilderInitialization();
       }
 
       private Builder(
           com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
         super(parent);
-
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessageV3
+                .alwaysUseFieldBuilders) {
+        }
       }
       @java.lang.Override
       public Builder clear() {
         super.clear();
-        bitField0_ = 0;
         id_ = "";
+
         cmd_ = "";
+
         filepath_ = "";
+
         fileSize_ = 0L;
-        checksum_ = "";
-        rspData_ = "";
-        chunkData_ = com.google.protobuf.ByteString.EMPTY;
+
+        recvSize_ = 0L;
+
+        currRecvSize_ = 0L;
+
         reqTs_ = 0L;
+
         rspTs_ = 0L;
+
         accessFilePosition_ = 0L;
+
         return this;
       }
 
@@ -1651,43 +1645,17 @@ public final class SenderMsg {
       @java.lang.Override
       public com.laiyz.proto.SenderMsg.Rsp buildPartial() {
         com.laiyz.proto.SenderMsg.Rsp result = new com.laiyz.proto.SenderMsg.Rsp(this);
-        if (bitField0_ != 0) { buildPartial0(result); }
+        result.id_ = id_;
+        result.cmd_ = cmd_;
+        result.filepath_ = filepath_;
+        result.fileSize_ = fileSize_;
+        result.recvSize_ = recvSize_;
+        result.currRecvSize_ = currRecvSize_;
+        result.reqTs_ = reqTs_;
+        result.rspTs_ = rspTs_;
+        result.accessFilePosition_ = accessFilePosition_;
         onBuilt();
         return result;
-      }
-
-      private void buildPartial0(com.laiyz.proto.SenderMsg.Rsp result) {
-        int from_bitField0_ = bitField0_;
-        if (((from_bitField0_ & 0x00000001) != 0)) {
-          result.id_ = id_;
-        }
-        if (((from_bitField0_ & 0x00000002) != 0)) {
-          result.cmd_ = cmd_;
-        }
-        if (((from_bitField0_ & 0x00000004) != 0)) {
-          result.filepath_ = filepath_;
-        }
-        if (((from_bitField0_ & 0x00000008) != 0)) {
-          result.fileSize_ = fileSize_;
-        }
-        if (((from_bitField0_ & 0x00000010) != 0)) {
-          result.checksum_ = checksum_;
-        }
-        if (((from_bitField0_ & 0x00000020) != 0)) {
-          result.rspData_ = rspData_;
-        }
-        if (((from_bitField0_ & 0x00000040) != 0)) {
-          result.chunkData_ = chunkData_;
-        }
-        if (((from_bitField0_ & 0x00000080) != 0)) {
-          result.reqTs_ = reqTs_;
-        }
-        if (((from_bitField0_ & 0x00000100) != 0)) {
-          result.rspTs_ = rspTs_;
-        }
-        if (((from_bitField0_ & 0x00000200) != 0)) {
-          result.accessFilePosition_ = accessFilePosition_;
-        }
       }
 
       @java.lang.Override
@@ -1736,34 +1704,24 @@ public final class SenderMsg {
         if (other == com.laiyz.proto.SenderMsg.Rsp.getDefaultInstance()) return this;
         if (!other.getId().isEmpty()) {
           id_ = other.id_;
-          bitField0_ |= 0x00000001;
           onChanged();
         }
         if (!other.getCmd().isEmpty()) {
           cmd_ = other.cmd_;
-          bitField0_ |= 0x00000002;
           onChanged();
         }
         if (!other.getFilepath().isEmpty()) {
           filepath_ = other.filepath_;
-          bitField0_ |= 0x00000004;
           onChanged();
         }
         if (other.getFileSize() != 0L) {
           setFileSize(other.getFileSize());
         }
-        if (!other.getChecksum().isEmpty()) {
-          checksum_ = other.checksum_;
-          bitField0_ |= 0x00000010;
-          onChanged();
+        if (other.getRecvSize() != 0L) {
+          setRecvSize(other.getRecvSize());
         }
-        if (!other.getRspData().isEmpty()) {
-          rspData_ = other.rspData_;
-          bitField0_ |= 0x00000020;
-          onChanged();
-        }
-        if (other.getChunkData() != com.google.protobuf.ByteString.EMPTY) {
-          setChunkData(other.getChunkData());
+        if (other.getCurrRecvSize() != 0L) {
+          setCurrRecvSize(other.getCurrRecvSize());
         }
         if (other.getReqTs() != 0L) {
           setReqTs(other.getReqTs());
@@ -1774,7 +1732,7 @@ public final class SenderMsg {
         if (other.getAccessFilePosition() != 0L) {
           setAccessFilePosition(other.getAccessFilePosition());
         }
-        this.mergeUnknownFields(other.getUnknownFields());
+        this.mergeUnknownFields(other.unknownFields);
         onChanged();
         return this;
       }
@@ -1789,83 +1747,19 @@ public final class SenderMsg {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws java.io.IOException {
-        if (extensionRegistry == null) {
-          throw new java.lang.NullPointerException();
-        }
+        com.laiyz.proto.SenderMsg.Rsp parsedMessage = null;
         try {
-          boolean done = false;
-          while (!done) {
-            int tag = input.readTag();
-            switch (tag) {
-              case 0:
-                done = true;
-                break;
-              case 10: {
-                id_ = input.readStringRequireUtf8();
-                bitField0_ |= 0x00000001;
-                break;
-              } // case 10
-              case 18: {
-                cmd_ = input.readStringRequireUtf8();
-                bitField0_ |= 0x00000002;
-                break;
-              } // case 18
-              case 26: {
-                filepath_ = input.readStringRequireUtf8();
-                bitField0_ |= 0x00000004;
-                break;
-              } // case 26
-              case 32: {
-                fileSize_ = input.readUInt64();
-                bitField0_ |= 0x00000008;
-                break;
-              } // case 32
-              case 42: {
-                checksum_ = input.readStringRequireUtf8();
-                bitField0_ |= 0x00000010;
-                break;
-              } // case 42
-              case 50: {
-                rspData_ = input.readStringRequireUtf8();
-                bitField0_ |= 0x00000020;
-                break;
-              } // case 50
-              case 58: {
-                chunkData_ = input.readBytes();
-                bitField0_ |= 0x00000040;
-                break;
-              } // case 58
-              case 64: {
-                reqTs_ = input.readUInt64();
-                bitField0_ |= 0x00000080;
-                break;
-              } // case 64
-              case 72: {
-                rspTs_ = input.readUInt64();
-                bitField0_ |= 0x00000100;
-                break;
-              } // case 72
-              case 80: {
-                accessFilePosition_ = input.readUInt64();
-                bitField0_ |= 0x00000200;
-                break;
-              } // case 80
-              default: {
-//                if (!super.parseUnknownField(input, extensionRegistry, tag)) {
-//                  done = true; // was an endgroup tag
-//                }
-                break;
-              } // default:
-            } // switch (tag)
-          } // while (!done)
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
         } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (com.laiyz.proto.SenderMsg.Rsp) e.getUnfinishedMessage();
           throw e.unwrapIOException();
         } finally {
-          onChanged();
-        } // finally
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
         return this;
       }
-      private int bitField0_;
 
       private java.lang.Object id_ = "";
       /**
@@ -1908,9 +1802,11 @@ public final class SenderMsg {
        */
       public Builder setId(
           java.lang.String value) {
-        if (value == null) { throw new NullPointerException(); }
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  
         id_ = value;
-        bitField0_ |= 0x00000001;
         onChanged();
         return this;
       }
@@ -1919,8 +1815,8 @@ public final class SenderMsg {
        * @return This builder for chaining.
        */
       public Builder clearId() {
+        
         id_ = getDefaultInstance().getId();
-        bitField0_ = (bitField0_ & ~0x00000001);
         onChanged();
         return this;
       }
@@ -1931,10 +1827,12 @@ public final class SenderMsg {
        */
       public Builder setIdBytes(
           com.google.protobuf.ByteString value) {
-        if (value == null) { throw new NullPointerException(); }
-        checkByteStringIsUtf8(value);
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+        
         id_ = value;
-        bitField0_ |= 0x00000001;
         onChanged();
         return this;
       }
@@ -1980,9 +1878,11 @@ public final class SenderMsg {
        */
       public Builder setCmd(
           java.lang.String value) {
-        if (value == null) { throw new NullPointerException(); }
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  
         cmd_ = value;
-        bitField0_ |= 0x00000002;
         onChanged();
         return this;
       }
@@ -1991,8 +1891,8 @@ public final class SenderMsg {
        * @return This builder for chaining.
        */
       public Builder clearCmd() {
+        
         cmd_ = getDefaultInstance().getCmd();
-        bitField0_ = (bitField0_ & ~0x00000002);
         onChanged();
         return this;
       }
@@ -2003,10 +1903,12 @@ public final class SenderMsg {
        */
       public Builder setCmdBytes(
           com.google.protobuf.ByteString value) {
-        if (value == null) { throw new NullPointerException(); }
-        checkByteStringIsUtf8(value);
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+        
         cmd_ = value;
-        bitField0_ |= 0x00000002;
         onChanged();
         return this;
       }
@@ -2052,9 +1954,11 @@ public final class SenderMsg {
        */
       public Builder setFilepath(
           java.lang.String value) {
-        if (value == null) { throw new NullPointerException(); }
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  
         filepath_ = value;
-        bitField0_ |= 0x00000004;
         onChanged();
         return this;
       }
@@ -2063,8 +1967,8 @@ public final class SenderMsg {
        * @return This builder for chaining.
        */
       public Builder clearFilepath() {
+        
         filepath_ = getDefaultInstance().getFilepath();
-        bitField0_ = (bitField0_ & ~0x00000004);
         onChanged();
         return this;
       }
@@ -2075,10 +1979,12 @@ public final class SenderMsg {
        */
       public Builder setFilepathBytes(
           com.google.protobuf.ByteString value) {
-        if (value == null) { throw new NullPointerException(); }
-        checkByteStringIsUtf8(value);
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+        
         filepath_ = value;
-        bitField0_ |= 0x00000004;
         onChanged();
         return this;
       }
@@ -2088,7 +1994,6 @@ public final class SenderMsg {
        * <code>uint64 fileSize = 4;</code>
        * @return The fileSize.
        */
-      @java.lang.Override
       public long getFileSize() {
         return fileSize_;
       }
@@ -2100,7 +2005,6 @@ public final class SenderMsg {
       public Builder setFileSize(long value) {
         
         fileSize_ = value;
-        bitField0_ |= 0x00000008;
         onChanged();
         return this;
       }
@@ -2109,215 +2013,97 @@ public final class SenderMsg {
        * @return This builder for chaining.
        */
       public Builder clearFileSize() {
-        bitField0_ = (bitField0_ & ~0x00000008);
+        
         fileSize_ = 0L;
         onChanged();
         return this;
       }
 
-      private java.lang.Object checksum_ = "";
+      private long recvSize_ ;
       /**
-       * <code>string checksum = 5;</code>
-       * @return The checksum.
+       * <code>uint64 recvSize = 5;</code>
+       * @return The recvSize.
        */
-      public java.lang.String getChecksum() {
-        java.lang.Object ref = checksum_;
-        if (!(ref instanceof java.lang.String)) {
-          com.google.protobuf.ByteString bs =
-              (com.google.protobuf.ByteString) ref;
-          java.lang.String s = bs.toStringUtf8();
-          checksum_ = s;
-          return s;
-        } else {
-          return (java.lang.String) ref;
-        }
+      public long getRecvSize() {
+        return recvSize_;
       }
       /**
-       * <code>string checksum = 5;</code>
-       * @return The bytes for checksum.
-       */
-      public com.google.protobuf.ByteString
-          getChecksumBytes() {
-        java.lang.Object ref = checksum_;
-        if (ref instanceof String) {
-          com.google.protobuf.ByteString b = 
-              com.google.protobuf.ByteString.copyFromUtf8(
-                  (java.lang.String) ref);
-          checksum_ = b;
-          return b;
-        } else {
-          return (com.google.protobuf.ByteString) ref;
-        }
-      }
-      /**
-       * <code>string checksum = 5;</code>
-       * @param value The checksum to set.
+       * <code>uint64 recvSize = 5;</code>
+       * @param value The recvSize to set.
        * @return This builder for chaining.
        */
-      public Builder setChecksum(
-          java.lang.String value) {
-        if (value == null) { throw new NullPointerException(); }
-        checksum_ = value;
-        bitField0_ |= 0x00000010;
+      public Builder setRecvSize(long value) {
+        
+        recvSize_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>string checksum = 5;</code>
+       * <code>uint64 recvSize = 5;</code>
        * @return This builder for chaining.
        */
-      public Builder clearChecksum() {
-        checksum_ = getDefaultInstance().getChecksum();
-        bitField0_ = (bitField0_ & ~0x00000010);
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>string checksum = 5;</code>
-       * @param value The bytes for checksum to set.
-       * @return This builder for chaining.
-       */
-      public Builder setChecksumBytes(
-          com.google.protobuf.ByteString value) {
-        if (value == null) { throw new NullPointerException(); }
-        checkByteStringIsUtf8(value);
-        checksum_ = value;
-        bitField0_ |= 0x00000010;
+      public Builder clearRecvSize() {
+        
+        recvSize_ = 0L;
         onChanged();
         return this;
       }
 
-      private java.lang.Object rspData_ = "";
+      private long currRecvSize_ ;
       /**
-       * <code>string rspData = 6;</code>
-       * @return The rspData.
+       * <code>uint64 currRecvSize = 6;</code>
+       * @return The currRecvSize.
        */
-      public java.lang.String getRspData() {
-        java.lang.Object ref = rspData_;
-        if (!(ref instanceof java.lang.String)) {
-          com.google.protobuf.ByteString bs =
-              (com.google.protobuf.ByteString) ref;
-          java.lang.String s = bs.toStringUtf8();
-          rspData_ = s;
-          return s;
-        } else {
-          return (java.lang.String) ref;
-        }
+      public long getCurrRecvSize() {
+        return currRecvSize_;
       }
       /**
-       * <code>string rspData = 6;</code>
-       * @return The bytes for rspData.
-       */
-      public com.google.protobuf.ByteString
-          getRspDataBytes() {
-        java.lang.Object ref = rspData_;
-        if (ref instanceof String) {
-          com.google.protobuf.ByteString b = 
-              com.google.protobuf.ByteString.copyFromUtf8(
-                  (java.lang.String) ref);
-          rspData_ = b;
-          return b;
-        } else {
-          return (com.google.protobuf.ByteString) ref;
-        }
-      }
-      /**
-       * <code>string rspData = 6;</code>
-       * @param value The rspData to set.
+       * <code>uint64 currRecvSize = 6;</code>
+       * @param value The currRecvSize to set.
        * @return This builder for chaining.
        */
-      public Builder setRspData(
-          java.lang.String value) {
-        if (value == null) { throw new NullPointerException(); }
-        rspData_ = value;
-        bitField0_ |= 0x00000020;
+      public Builder setCurrRecvSize(long value) {
+        
+        currRecvSize_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>string rspData = 6;</code>
+       * <code>uint64 currRecvSize = 6;</code>
        * @return This builder for chaining.
        */
-      public Builder clearRspData() {
-        rspData_ = getDefaultInstance().getRspData();
-        bitField0_ = (bitField0_ & ~0x00000020);
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>string rspData = 6;</code>
-       * @param value The bytes for rspData to set.
-       * @return This builder for chaining.
-       */
-      public Builder setRspDataBytes(
-          com.google.protobuf.ByteString value) {
-        if (value == null) { throw new NullPointerException(); }
-        checkByteStringIsUtf8(value);
-        rspData_ = value;
-        bitField0_ |= 0x00000020;
-        onChanged();
-        return this;
-      }
-
-      private com.google.protobuf.ByteString chunkData_ = com.google.protobuf.ByteString.EMPTY;
-      /**
-       * <code>bytes chunkData = 7;</code>
-       * @return The chunkData.
-       */
-      @java.lang.Override
-      public com.google.protobuf.ByteString getChunkData() {
-        return chunkData_;
-      }
-      /**
-       * <code>bytes chunkData = 7;</code>
-       * @param value The chunkData to set.
-       * @return This builder for chaining.
-       */
-      public Builder setChunkData(com.google.protobuf.ByteString value) {
-        if (value == null) { throw new NullPointerException(); }
-        chunkData_ = value;
-        bitField0_ |= 0x00000040;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>bytes chunkData = 7;</code>
-       * @return This builder for chaining.
-       */
-      public Builder clearChunkData() {
-        bitField0_ = (bitField0_ & ~0x00000040);
-        chunkData_ = getDefaultInstance().getChunkData();
+      public Builder clearCurrRecvSize() {
+        
+        currRecvSize_ = 0L;
         onChanged();
         return this;
       }
 
       private long reqTs_ ;
       /**
-       * <code>uint64 reqTs = 8;</code>
+       * <code>uint64 reqTs = 7;</code>
        * @return The reqTs.
        */
-      @java.lang.Override
       public long getReqTs() {
         return reqTs_;
       }
       /**
-       * <code>uint64 reqTs = 8;</code>
+       * <code>uint64 reqTs = 7;</code>
        * @param value The reqTs to set.
        * @return This builder for chaining.
        */
       public Builder setReqTs(long value) {
         
         reqTs_ = value;
-        bitField0_ |= 0x00000080;
         onChanged();
         return this;
       }
       /**
-       * <code>uint64 reqTs = 8;</code>
+       * <code>uint64 reqTs = 7;</code>
        * @return This builder for chaining.
        */
       public Builder clearReqTs() {
-        bitField0_ = (bitField0_ & ~0x00000080);
+        
         reqTs_ = 0L;
         onChanged();
         return this;
@@ -2325,31 +2111,29 @@ public final class SenderMsg {
 
       private long rspTs_ ;
       /**
-       * <code>uint64 rspTs = 9;</code>
+       * <code>uint64 rspTs = 8;</code>
        * @return The rspTs.
        */
-      @java.lang.Override
       public long getRspTs() {
         return rspTs_;
       }
       /**
-       * <code>uint64 rspTs = 9;</code>
+       * <code>uint64 rspTs = 8;</code>
        * @param value The rspTs to set.
        * @return This builder for chaining.
        */
       public Builder setRspTs(long value) {
         
         rspTs_ = value;
-        bitField0_ |= 0x00000100;
         onChanged();
         return this;
       }
       /**
-       * <code>uint64 rspTs = 9;</code>
+       * <code>uint64 rspTs = 8;</code>
        * @return This builder for chaining.
        */
       public Builder clearRspTs() {
-        bitField0_ = (bitField0_ & ~0x00000100);
+        
         rspTs_ = 0L;
         onChanged();
         return this;
@@ -2357,31 +2141,29 @@ public final class SenderMsg {
 
       private long accessFilePosition_ ;
       /**
-       * <code>uint64 accessFilePosition = 10;</code>
+       * <code>uint64 accessFilePosition = 9;</code>
        * @return The accessFilePosition.
        */
-      @java.lang.Override
       public long getAccessFilePosition() {
         return accessFilePosition_;
       }
       /**
-       * <code>uint64 accessFilePosition = 10;</code>
+       * <code>uint64 accessFilePosition = 9;</code>
        * @param value The accessFilePosition to set.
        * @return This builder for chaining.
        */
       public Builder setAccessFilePosition(long value) {
         
         accessFilePosition_ = value;
-        bitField0_ |= 0x00000200;
         onChanged();
         return this;
       }
       /**
-       * <code>uint64 accessFilePosition = 10;</code>
+       * <code>uint64 accessFilePosition = 9;</code>
        * @return This builder for chaining.
        */
       public Builder clearAccessFilePosition() {
-        bitField0_ = (bitField0_ & ~0x00000200);
+        
         accessFilePosition_ = 0L;
         onChanged();
         return this;
@@ -2419,18 +2201,7 @@ public final class SenderMsg {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-        Builder builder = newBuilder();
-        try {
-          builder.mergeFrom(input, extensionRegistry);
-        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          throw e.setUnfinishedMessage(builder.buildPartial());
-        } catch (com.google.protobuf.UninitializedMessageException e) {
-          throw e.asInvalidProtocolBufferException().setUnfinishedMessage(builder.buildPartial());
-        } catch (java.io.IOException e) {
-          throw new com.google.protobuf.InvalidProtocolBufferException(e)
-              .setUnfinishedMessage(builder.buildPartial());
-        }
-        return builder.buildPartial();
+        return new Rsp(input, extensionRegistry);
       }
     };
 
@@ -2471,12 +2242,12 @@ public final class SenderMsg {
     java.lang.String[] descriptorData = {
       "\n\017SenderMsg.proto\022\017com.laiyz.proto\"<\n\003Re" +
       "q\022\n\n\002id\030\001 \001(\t\022\013\n\003cmd\030\002 \001(\t\022\020\n\010filepath\030\003" +
-      " \001(\t\022\n\n\002ts\030\004 \001(\004\"\262\001\n\003Rsp\022\n\n\002id\030\001 \001(\t\022\013\n\003" +
+      " \001(\t\022\n\n\002ts\030\004 \001(\004\"\244\001\n\003Rsp\022\n\n\002id\030\001 \001(\t\022\013\n\003" +
       "cmd\030\002 \001(\t\022\020\n\010filepath\030\003 \001(\t\022\020\n\010fileSize\030" +
-      "\004 \001(\004\022\020\n\010checksum\030\005 \001(\t\022\017\n\007rspData\030\006 \001(\t" +
-      "\022\021\n\tchunkData\030\007 \001(\014\022\r\n\005reqTs\030\010 \001(\004\022\r\n\005rs" +
-      "pTs\030\t \001(\004\022\032\n\022accessFilePosition\030\n \001(\004B\036\n" +
-      "\017com.laiyz.protoB\tSenderMsgH\001b\006proto3"
+      "\004 \001(\004\022\020\n\010recvSize\030\005 \001(\004\022\024\n\014currRecvSize\030" +
+      "\006 \001(\004\022\r\n\005reqTs\030\007 \001(\004\022\r\n\005rspTs\030\010 \001(\004\022\032\n\022a" +
+      "ccessFilePosition\030\t \001(\004B\036\n\017com.laiyz.pro" +
+      "toB\tSenderMsgH\001b\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
@@ -2493,7 +2264,7 @@ public final class SenderMsg {
     internal_static_com_laiyz_proto_Rsp_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_com_laiyz_proto_Rsp_descriptor,
-        new java.lang.String[] { "Id", "Cmd", "Filepath", "FileSize", "Checksum", "RspData", "ChunkData", "ReqTs", "RspTs", "AccessFilePosition", });
+        new java.lang.String[] { "Id", "Cmd", "Filepath", "FileSize", "RecvSize", "CurrRecvSize", "ReqTs", "RspTs", "AccessFilePosition", });
   }
 
   // @@protoc_insertion_point(outer_class_scope)

@@ -3,9 +3,11 @@ package com.laiyz.client.base;
 import com.alibaba.fastjson.JSON;
 import com.laiyz.client.task.impl.FileTask;
 import com.laiyz.client.task.impl.FileTaskListener;
+import com.laiyz.comm.BFileCmd;
 import com.laiyz.comm.BFileInfo;
 import com.laiyz.comm.StatusEnum;
 import com.laiyz.proto.BFileMsg;
+import com.laiyz.proto.SenderMsg;
 import com.laiyz.util.ConstUtil;
 import com.laiyz.util.CtxUtil;
 import io.netty.buffer.ByteBuf;
@@ -28,6 +30,7 @@ public class FileRspHelper {
             ClientCache.addTask(rsp.getId(), fileTask);
             fileTask.addListner(new FileTaskListener());
         }
+
         // append part of file data to storage buffer(sbuf) of task
         StatusEnum status = fileTask.appendFileData(ctx,fileData, rsp);
         // all file data received, try to start next file download
@@ -58,9 +61,12 @@ public class FileRspHelper {
             ClientCache.cleanAll();
             log.info("all files received.");
 
-            ctx.write(Unpooled.wrappedBuffer(ConstUtil.bfile_info_prefix.getBytes(CharsetUtil.UTF_8)));
-            String text = "all completed";
-            ctx.writeAndFlush(Unpooled.wrappedBuffer(text.getBytes(CharsetUtil.UTF_8)));
+            ctx.write(Unpooled.wrappedBuffer(ConstUtil.sender_req_prefix.getBytes(CharsetUtil.UTF_8)));
+            SenderMsg.Rsp senderMsgRsp = SenderMsg.Rsp.newBuilder()
+                    .setCmd(BFileCmd.RSP_UPLOAD_COMPLETED)
+                    .build();
+            ctx.write(Unpooled.wrappedBuffer(senderMsgRsp.toByteArray()));
+            ctx.writeAndFlush(Unpooled.wrappedBuffer(ConstUtil.delimiter.getBytes(CharsetUtil.UTF_8)));
 
         }
     }

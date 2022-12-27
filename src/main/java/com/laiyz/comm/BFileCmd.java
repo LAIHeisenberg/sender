@@ -16,4 +16,7 @@ public interface BFileCmd {
     public static final String RSP_FILE = "RSP_FILE";
     public static final String RSP_DIR = "RSP_DIR";
     public static final String RSP_LIST = "RSP_LIST";
+    public static final String RSP_UPLOAD = "RSP_UPLOAD";
+    public static final String RSP_UPLOAD_PROGRESS = "RSP_UPLOAD_PROGRESS";
+    public static final String RSP_UPLOAD_COMPLETED = "RSP_UPLOAD_COMPLETED";
 }

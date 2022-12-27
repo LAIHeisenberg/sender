@@ -23,6 +23,8 @@ import java.io.IOException;
 import java.io.RandomAccessFile;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.text.DecimalFormat;
+import java.time.Instant;
 
 
 @Slf4j
@@ -47,29 +49,40 @@ public class FileClientHandler extends SimpleChannelInboundHandler<ByteBuf> {
         ctx.write(Unpooled.wrappedBuffer(req.toByteArray()));
         ctx.writeAndFlush(Unpooled.wrappedBuffer(ConstUtil.delimiter.getBytes(CharsetUtil.UTF_8)));
 
-
-        sendFile(ctx, this.filePath, System.currentTimeMillis());
-
     }
 
     @Override
     public void channelRead0(ChannelHandlerContext ctx, ByteBuf msg) throws Exception {
 
         int len = msg.readableBytes();
-
-        if (len < ConstUtil.bfile_info_prefix_len){
+        if (len < ConstUtil.sender_req_prefix_len){
             return;
         }
         msg.markReaderIndex();
-        byte[] data = new byte[ConstUtil.bfile_info_prefix_len];
+        byte[] data = new byte[ConstUtil.sender_req_prefix_len];
         msg.readBytes(data);
         String prefix = BByteUtil.toStr(data);
-        if (ConstUtil.bfile_info_prefix.equals(prefix)) {
-            int subLen = len - ConstUtil.bfile_info_prefix_len;
+        if (ConstUtil.sender_req_prefix.equals(prefix)) {
+            int subLen = len - ConstUtil.sender_req_prefix_len;
             byte[] b = new byte[subLen];
             msg.readBytes(b);
-            String result = BByteUtil.toStr(b);
-            System.out.print("\r"+result);
+            SenderMsg.Rsp rsp = SenderMsg.Rsp.parseFrom(b);
+            switch (rsp.getCmd()){
+                case BFileCmd.RSP_UPLOAD:
+                    long accessFilePosition = rsp.getAccessFilePosition();
+                    sendFile(ctx, this.filePath, accessFilePosition, Instant.now().getEpochSecond());
+                    break;
+                case BFileCmd.RSP_UPLOAD_PROGRESS:
+                    long fileSize = rsp.getFileSize();
+                    long recvSize = rsp.getRecvSize();
+                    String result = String.format("send file data, progress: %s/%s(%s%%) avg speed:%s remaining time: %s", recvSize, fileSize, Math.floor((recvSize*1d/fileSize*1d) * 10000)/100, calcAvgSpeed(rsp.getCurrRecvSize(), rsp.getReqTs()), calcTimeRemaining(fileSize-recvSize,rsp.getCurrRecvSize(),rsp.getReqTs()));
+                    System.out.print("\r"+result);
+//                    log.info("\r send file data, progress: {}/{}({}%) avg speed:{}", recvSize, fileSize, Math.floor((recvSize*1d/fileSize*1d) * 10000)/100, calcAvgSpeed(rsp.getCurrRecvSize(), rsp.getReqTs()));
+                    break;
+                case BFileCmd.RSP_UPLOAD_COMPLETED:
+                    System.out.println("\nall files send.");
+                    break;
+            }
 //            log.info(result);
 //            if ("all completed".equals(result)){
 //                System.exit(0);
@@ -92,7 +105,7 @@ public class FileClientHandler extends SimpleChannelInboundHandler<ByteBuf> {
      * @param filePath -  file full path
      * @param reqTs      - timestamp of client request this file
      */
-    private void sendFile(ChannelHandlerContext ctx, String filePath, long reqTs) {
+    private void sendFile(ChannelHandlerContext ctx, String filePath, long pos, long reqTs) {
         log.debug(">>>>>>>>>> sending file/dir: {}", filePath);
         File file = new File(filePath);
         if (Files.isDirectory(Paths.get(filePath))) {
@@ -121,7 +134,6 @@ public class FileClientHandler extends SimpleChannelInboundHandler<ByteBuf> {
             }
         } else { // zero-copy FileRegion mode
 
-            long pos = 0;
             int chunkCounter = 0;
             int chunkSize;
             while ((filelen - pos) > 0) {
@@ -152,7 +164,7 @@ public class FileClientHandler extends SimpleChannelInboundHandler<ByteBuf> {
 
                 chunkCounter++;
                 pos += chunkSize;
-                log.info("=============== wrote the {} chunk, wrote len: {}, progress: {}/{} =============", chunkCounter, (rspInfoLen + chunkSize), pos, filelen);
+//                log.info("=============== wrote the {} chunk, wrote len: {}, progress: {}/{} =============", chunkCounter, (rspInfoLen + chunkSize), pos, filelen);
             }
         }
         log.info("write file({}) to channel cost time: {} sec.", filePath, (System.currentTimeMillis() - startTime) / 1000);
@@ -166,7 +178,33 @@ public class FileClientHandler extends SimpleChannelInboundHandler<ByteBuf> {
             if (subfile.isDirectory()) {
                 sendDir(ctx, subfile, reqTs);
             }
-            sendFile(ctx, subfile.getAbsolutePath(), reqTs);
+            sendFile(ctx, subfile.getAbsolutePath(),0, reqTs);
+        }
+    }
+
+    private String calcAvgSpeed(long currRecvSize, long reqTs){
+        long currTs = Instant.now().getEpochSecond();
+        double xKb = currRecvSize * 1d / Math.max((currTs-reqTs),0.5) / 1024;
+        if (xKb < 1024){
+            DecimalFormat df = new DecimalFormat("####.00");
+            return df.format(xKb)+"KB/S";
+        }else {
+            double xmb = xKb / 1024;
+            DecimalFormat df = new DecimalFormat("#0.00");
+            return df.format(xmb)+"MB/S";
+        }
+    }
+
+    private String calcTimeRemaining(long remainSize ,long currRecvSize, long reqTs){
+
+        long currTs = Instant.now().getEpochSecond();
+        double speed = currRecvSize * 1d / Math.max((currTs-reqTs),0.5);
+        double remainSec = remainSize / speed;
+        int minute = (int) (remainSec / 60);
+        if (minute < 1){
+            return "0 min "+(int)(remainSec % 60)+" sec";
+        }else {
+            return minute +" min "+(int)(remainSec % 60)+" sec";
         }
     }
 

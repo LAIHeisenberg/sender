@@ -16,6 +16,10 @@
 
 package com.laiyz.server;
 
+import com.laiyz.client.base.ClientCache;
+import com.laiyz.client.task.impl.FileTask;
+import com.laiyz.client.task.impl.FileTaskListener;
+import com.laiyz.comm.BFileCmd;
 import com.laiyz.proto.BFileMsg;
 import com.laiyz.proto.SenderMsg;
 import com.laiyz.server.base.ReqDispatcher;
@@ -57,13 +61,25 @@ public class FileServerHandler extends SimpleChannelInboundHandler<ByteBuf> {
             byte[] reqBytes = new byte[len - ConstUtil.sender_req_prefix_len];
             msg.readBytes(reqBytes);
             SenderMsg.Req req = SenderMsg.Req.parseFrom(reqBytes);
-            System.out.println(req);
-            long cacheDataPosistion = BFileUtil.getCacheDataPosistion(BFileUtil.getTmpCacheFileFullPath(req.getFilepath()));
-
-            ctx.write(Unpooled.wrappedBuffer(ConstUtil.sender_req_write_position_prefix.getBytes(CharsetUtil.UTF_8)));
-            ctx.write(Unpooled.wrappedBuffer(String.valueOf(cacheDataPosistion).getBytes(CharsetUtil.UTF_8)));
-            ctx.writeAndFlush(Unpooled.wrappedBuffer(ConstUtil.delimiter.getBytes(CharsetUtil.UTF_8)));
-
+            switch (req.getCmd()){
+                case BFileCmd.REQ_UPLOAD :
+                    long cacheDataPosistion = BFileUtil.getTmpFileLength(req.getFilepath());
+                    if (cacheDataPosistion > 0l){
+                        FileTask fileTask;
+                        if ((fileTask = ClientCache.getTask(req.getId())) != null) {
+                            fileTask.resetRecvSize(cacheDataPosistion);
+                        }
+                    }
+                    ctx.write(Unpooled.wrappedBuffer(ConstUtil.sender_req_prefix.getBytes(CharsetUtil.UTF_8)));
+                    SenderMsg.Rsp rsp = SenderMsg.Rsp.newBuilder()
+                            .setId(req.getId())
+                            .setFilepath(req.getFilepath())
+                            .setAccessFilePosition(cacheDataPosistion)
+                            .setCmd(BFileCmd.RSP_UPLOAD).build();
+                    ctx.write(Unpooled.wrappedBuffer(rsp.toByteArray()));
+                    ctx.writeAndFlush(Unpooled.wrappedBuffer(ConstUtil.delimiter.getBytes(CharsetUtil.UTF_8)));
+                    break;
+            }
         }else {
             msg.resetReaderIndex();
             byte[] data = new byte[msg.readableBytes()];

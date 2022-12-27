@@ -8,6 +8,7 @@ import com.laiyz.proto.BFileMsg;
 import com.laiyz.proto.SenderMsg;
 import com.laiyz.util.BFileUtil;
 import com.laiyz.util.ConstUtil;
+import com.laiyz.util.ThreadPoolUtil;
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.Unpooled;
 import io.netty.channel.ChannelHandlerContext;
@@ -119,20 +120,19 @@ public class FileTask implements ITask {
         recvSize += len;
         currRecvSize += len;
 
-//        log.info("recv file data len: {}, progress: {}/{}({}%) avg speed:{}MB/s", len, recvSize, fileSize, Math.floor((recvSize*1d/fileSize*1d) * 10000)/100, avgSpeed);
-//        String resp = String.format("recv file data, progress: %s/%s(%s) avg speed:%s", recvSize, fileSize, Math.floor((recvSize*1d/fileSize*1d) * 10000)/100, calcAvgSpeed(recvSize, rsp.getReqTs()));
-
-        ctx.write(Unpooled.wrappedBuffer(ConstUtil.sender_req_prefix.getBytes(CharsetUtil.UTF_8)));
-        SenderMsg.Rsp senderMsgRsp = SenderMsg.Rsp.newBuilder()
-                .setId(rsp.getId())
-                .setCmd(BFileCmd.RSP_UPLOAD_PROGRESS)
-                .setFileSize(rsp.getFileSize())
-                .setReqTs(rsp.getReqTs())
-                .setRecvSize(recvSize)
-                .setCurrRecvSize(currRecvSize)
-                .build();
-        ctx.write(Unpooled.wrappedBuffer(senderMsgRsp.toByteArray()));
-        ctx.writeAndFlush(Unpooled.wrappedBuffer(ConstUtil.delimiter.getBytes(CharsetUtil.UTF_8)));
+        ThreadPoolUtil.submitTask(() -> {
+            ctx.write(Unpooled.wrappedBuffer(ConstUtil.sender_req_prefix.getBytes(CharsetUtil.UTF_8)));
+            SenderMsg.Rsp senderMsgRsp = SenderMsg.Rsp.newBuilder()
+                    .setId(rsp.getId())
+                    .setCmd(BFileCmd.RSP_UPLOAD_PROGRESS)
+                    .setFileSize(rsp.getFileSize())
+                    .setReqTs(rsp.getReqTs())
+                    .setRecvSize(recvSize)
+                    .setCurrRecvSize(currRecvSize)
+                    .build();
+            ctx.write(Unpooled.wrappedBuffer(senderMsgRsp.toByteArray()));
+            ctx.writeAndFlush(Unpooled.wrappedBuffer(ConstUtil.delimiter.getBytes(CharsetUtil.UTF_8)));
+        });
 
         boolean saveOK;
         long saveSize = 0l;

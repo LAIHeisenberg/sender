@@ -200,12 +200,21 @@ public class FileClientHandler extends SimpleChannelInboundHandler<ByteBuf> {
         long currTs = Instant.now().getEpochSecond();
         double speed = currRecvSize * 1d / Math.max((currTs-reqTs),0.5);
         double remainSec = remainSize / speed;
-        int minute = (int) (remainSec / 60);
-        if (minute < 1){
-            return "0 min "+(int)(remainSec % 60)+" sec";
-        }else {
-            return minute +" min "+(int)(remainSec % 60)+" sec";
+
+        int hour = (int)remainSec/3600;
+        int mins = (int)remainSec % 3600 / 60;
+        int sec = (int)remainSec % 3600 % 60;
+        StringBuffer sbf = new StringBuffer();
+        if (hour > 0){
+            sbf.append(hour+" hour ");
         }
+        if (mins > 0){
+            sbf.append(mins+" min ");
+        }
+        sbf.append(sec+"sec ");
+        sbf.append("/ total sec "+(int)remainSec);
+        return sbf.toString();
+
     }
 
 }

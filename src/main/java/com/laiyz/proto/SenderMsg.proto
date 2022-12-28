@@ -11,6 +11,7 @@ message Req{
     string cmd = 2;
     string filepath = 3;
     uint64 ts = 4;
+    uint64 accessFilePosition = 5;
 }
 
 message Rsp{
@@ -18,9 +19,10 @@ message Rsp{
     string cmd = 2;
     string filepath = 3;
     uint64 fileSize = 4;
-    uint64 recvSize = 5;
-    uint64 currRecvSize = 6;
-    uint64 reqTs = 7;
-    uint64 rspTs = 8;
-    uint64 accessFilePosition = 9;
+    string checksum = 5;
+    uint64 recvSize = 6;
+    uint64 currRecvSize = 7;
+    uint64 reqTs = 8;
+    uint64 rspTs = 9;
+    uint64 accessFilePosition = 10;
 }

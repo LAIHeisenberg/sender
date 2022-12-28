@@ -4,7 +4,6 @@ import com.laiyz.client.task.ITask;
 import com.laiyz.client.task.TaskListener;
 import com.laiyz.comm.BFileCmd;
 import com.laiyz.comm.StatusEnum;
-import com.laiyz.proto.BFileMsg;
 import com.laiyz.proto.SenderMsg;
 import com.laiyz.util.BFileUtil;
 import com.laiyz.util.ConstUtil;
@@ -36,7 +35,7 @@ public class FileTask implements ITask {
 
     private FileOutputStream fos = null;
 
-    private BFileMsg.BFileRsp rsp = null;
+    private SenderMsg.Rsp rsp = null;
 
 
     // 8k * 8 = 64k
@@ -50,8 +49,6 @@ public class FileTask implements ITask {
 
     private String clientFullPath = null;
     private String tempFullPath = null;
-    //临时缓存文件路径,记录了当前已经写入磁盘的position,作为断点续传使用
-    private String tmpCacheFilePath = null;
 
 
     private long startTime = System.currentTimeMillis();
@@ -64,7 +61,7 @@ public class FileTask implements ITask {
     FileTask() {
     }
 
-    public FileTask(BFileMsg.BFileRsp rsp) {
+    public FileTask(SenderMsg.Rsp rsp) {
         init(rsp);
     }
 
@@ -72,7 +69,7 @@ public class FileTask implements ITask {
         listener.add(listner);
     }
 
-    private void init(BFileMsg.BFileRsp rsp) {
+    private void init(SenderMsg.Rsp rsp) {
         try {
             this.rsp = rsp;
             this.fileSize = rsp.getFileSize();
@@ -82,7 +79,6 @@ public class FileTask implements ITask {
 //            checkFileExists(this.clientFullPath);
 
             this.tempFullPath = BFileUtil.getClientTempFileFullPath(clientFullPath);
-            this.tmpCacheFilePath = BFileUtil.getTmpCacheFileFullPath(clientFullPath);
 
 //            this.tempFullPath = BFileUtil.getClientTempFileFullPath();
 //            checkFileExists(this.tempFullPath);
@@ -104,7 +100,7 @@ public class FileTask implements ITask {
     }
 
     @Override
-    public StatusEnum appendFileData(ChannelHandlerContext ctx, byte[] fileData, BFileMsg.BFileRsp rsp) {
+    public StatusEnum appendFileData(ChannelHandlerContext ctx, byte[] fileData, SenderMsg.Rsp rsp, boolean writeProgress) {
         counter++;
         int len = fileData.length;
         if (len <= 0) {
@@ -120,19 +116,21 @@ public class FileTask implements ITask {
         recvSize += len;
         currRecvSize += len;
 
-        ThreadPoolUtil.submitTask(() -> {
-            ctx.write(Unpooled.wrappedBuffer(ConstUtil.sender_req_prefix.getBytes(CharsetUtil.UTF_8)));
-            SenderMsg.Rsp senderMsgRsp = SenderMsg.Rsp.newBuilder()
-                    .setId(rsp.getId())
-                    .setCmd(BFileCmd.RSP_UPLOAD_PROGRESS)
-                    .setFileSize(rsp.getFileSize())
-                    .setReqTs(rsp.getReqTs())
-                    .setRecvSize(recvSize)
-                    .setCurrRecvSize(currRecvSize)
-                    .build();
-            ctx.write(Unpooled.wrappedBuffer(senderMsgRsp.toByteArray()));
-            ctx.writeAndFlush(Unpooled.wrappedBuffer(ConstUtil.delimiter.getBytes(CharsetUtil.UTF_8)));
-        });
+        if (writeProgress){
+            ThreadPoolUtil.submitTask(() -> {
+                ctx.write(Unpooled.wrappedBuffer(ConstUtil.sender_req_prefix.getBytes(CharsetUtil.UTF_8)));
+                SenderMsg.Rsp senderMsgRsp = SenderMsg.Rsp.newBuilder()
+                        .setId(rsp.getId())
+                        .setCmd(BFileCmd.RSP_UPLOAD_PROGRESS)
+                        .setFileSize(rsp.getFileSize())
+                        .setReqTs(rsp.getReqTs())
+                        .setRecvSize(recvSize)
+                        .setCurrRecvSize(currRecvSize)
+                        .build();
+                ctx.write(Unpooled.wrappedBuffer(senderMsgRsp.toByteArray()));
+                ctx.writeAndFlush(Unpooled.wrappedBuffer(ConstUtil.delimiter.getBytes(CharsetUtil.UTF_8)));
+            });
+        }
 
         boolean saveOK;
         long saveSize = 0l;
@@ -144,9 +142,6 @@ public class FileTask implements ITask {
             // reset recvSize, sbuf
             if (!saveOK) {
                 log.warn("save file data error, recvSize: {}, spos: {}, len: ", recvSize, spos, len);
-                // TODO save file data fail, retry 3 times,
-                //  then throw exception
-                //  or write down break point and skip this file, after all file downloaded, report this situation
                 return StatusEnum.ERR_SAVE_DATA;
             }
             log.info("saveOK, saveSize: {}, recvSize: {}, spos: {}, len: {}", saveSize, recvSize, spos, len);

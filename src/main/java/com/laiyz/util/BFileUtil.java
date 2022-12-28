@@ -18,6 +18,7 @@ import org.apache.commons.lang3.StringUtils;
 import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.time.Instant;
 import java.util.*;
 import java.util.function.Consumer;
 import java.util.regex.Matcher;
@@ -361,21 +362,15 @@ public class BFileUtil {
         return 0L;
     }
 
-    public static String getTmpCacheFileFullPath(String filePath){
-        if (isDir(filePath)) return null;
-        StringBuffer sbf = new StringBuffer(filePath);
-        int i = filePath.lastIndexOf(File.separator);
-        return sbf.insert(i+1,".tmp_cache_").toString();
+    public static long getFileLength(String filePath){
+        try {
+            File file = new File(filePath);
+            if (!file.isDirectory()){
+                return file.length();
+            }
+        }catch (Exception e){}
+        return 0L;
     }
-
-    public static void main(String[] args){
-
-        String filePath = "/home/laiyz/下载/mysql.tar";
-        System.out.println(getTmpCacheFileFullPath(filePath));
-
-
-    }
-
 
     /**
      * @param serverRelativeFile
@@ -424,6 +419,10 @@ public class BFileUtil {
      */
     public static ByteBuf buildRspFile(String serverpath, long filesize, String checksum, long reqTs) {
         return buildRsp(BFileCmd.RSP_FILE, serverpath, filesize, checksum, null, null, reqTs);
+    }
+
+    public static ByteBuf buildPullFile(String serverpath, long filesize, String checksum, long reqTs) {
+        return buildRsp(BFileCmd.RSP_PULL, serverpath, filesize, checksum, null, null, reqTs);
     }
 
     public static ByteBuf buildRspDir(String serverpath, long reqTs) {
@@ -484,14 +483,12 @@ public class BFileUtil {
         byte[] prefix = BByteUtil.toBytes(ConstUtil.bfile_info_prefix);
         // BFile info
 
-        BFileMsg.BFileRsp rsp = BFileMsg.BFileRsp.newBuilder()
+        SenderMsg.Rsp rsp = SenderMsg.Rsp .newBuilder()
                 .setId(getReqId(filePath)) // rspId = reqId
                 .setCmd(cmd) //BFileCmd.CMD_RSP)
                 .setFilepath(filePath) // relative path(not contains client.dir or server.dir)
                 .setFileSize(fileSize)
                 .setChecksum(checksum) // file fingerprint/ md5(server_dir_abs_path)
-                .setRspData(StringUtils.trimToEmpty(rspData))
-                .setChunkData(chunkData == null ? ByteString.EMPTY : ByteString.copyFrom(chunkData))
                 .setReqTs(reqTs)
                 .setRspTs(System.currentTimeMillis())
                 .build();
@@ -548,7 +545,19 @@ public class BFileUtil {
                 .setId(getReqId(filepath))
                 .setCmd(cmd)
                 .setFilepath(filepath)
-                .setTs(System.currentTimeMillis())
+                .setTs(Instant.now().getEpochSecond())
+                .build();
+
+        return req;
+    }
+
+    public static SenderMsg.Req buildSenderReq(String cmd, String filepath, long accessFilePosition) {
+        SenderMsg.Req req = SenderMsg.Req.newBuilder()
+                .setId(getReqId(filepath))
+                .setCmd(cmd)
+                .setFilepath(filepath)
+                .setTs(Instant.now().getEpochSecond())
+                .setAccessFilePosition(accessFilePosition)
                 .build();
 
         return req;

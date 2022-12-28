@@ -86,13 +86,12 @@ public final class FileServer {
 
                             // --- inbound
                             // if os not support zero-copy/sslEnabled, used this, must be the first inbound handler
-                            p.addLast(new ChunkedReadHandler());
+//                            p.addLast(new ChunkedReadHandler());
 
-                            ByteBuf delimiter = Unpooled.copiedBuffer(ConstUtil.delimiter.getBytes(CharsetUtil.UTF_8));
                             // inbound frameLen = chunkSize[default: 8192] + BFileRsp header)
 //                            p.addLast(new DelimiterBasedFrameDecoder(10240, delimiter));
 
-                            p.addLast(new DelimiterBasedFrameDecoder(Integer.MAX_VALUE, delimiter));
+                            p.addLast(new DelimiterBasedFrameDecoder(Integer.MAX_VALUE, Unpooled.copiedBuffer(ConstUtil.delimiter.getBytes(CharsetUtil.UTF_8))));
 
                             p.addLast(new FileServerHandler());
                             p.addLast(new FileServerHandler2());

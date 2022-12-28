@@ -5,6 +5,7 @@ import com.laiyz.client.task.impl.FileTask;
 import com.laiyz.comm.BFileCombo;
 import com.laiyz.comm.BFileInfo;
 import com.laiyz.proto.BFileMsg;
+import com.laiyz.proto.SenderMsg;
 import com.laiyz.util.BFileUtil;
 import org.apache.commons.collections.map.HashedMap;
 
@@ -27,7 +28,7 @@ public class ClientCache {
 
     // ------------- only for ChunkedFile mode start ----------------
     /** ChunkedFile mode -> key: key: BFileReq.id=reqId, value: the BFileRsp info */
-    private static Map<String, BFileMsg.BFileRsp> rspInfoMap = new HashMap<>();
+    private static Map<String, SenderMsg.Rsp> rspInfoMap = new HashMap<>();
 
     /** ChunkedFile mode, recvFileKey = (BFileReq.id=reqId)) */
     private static volatile String recvFileKey = null;
@@ -47,11 +48,11 @@ public class ClientCache {
      * @param key
      * @return
      */
-    public static BFileMsg.BFileRsp getRspInfo(String key) {
+    public static SenderMsg.Rsp getRspInfo(String key) {
         return rspInfoMap.get(key);
     }
 
-    public static void addRspInfo(String key, BFileMsg.BFileRsp rsp) {
+    public static void addRspInfo(String key, SenderMsg.Rsp rsp) {
         recvFileKey = key; // update recvFileKey
         rspInfoMap.put(key, rsp);
     }

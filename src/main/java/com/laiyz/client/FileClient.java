@@ -86,7 +86,7 @@ public final class FileClient {
                             // outbound (default ByteBuf)
                             // no encoder, direct send ByteBuf
                             // if os not support zero-copy, used ChunkedWriteHandler
-                            p.addLast(new ChunkedWriteHandler());
+//                            p.addLast(new ChunkedWriteHandler());
                             p.addLast(new FileClientHandler(filePath));
                         }
                     });

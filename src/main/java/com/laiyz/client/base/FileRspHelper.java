@@ -6,7 +6,6 @@ import com.laiyz.client.task.impl.FileTaskListener;
 import com.laiyz.comm.BFileCmd;
 import com.laiyz.comm.BFileInfo;
 import com.laiyz.comm.StatusEnum;
-import com.laiyz.proto.BFileMsg;
 import com.laiyz.proto.SenderMsg;
 import com.laiyz.util.ConstUtil;
 import com.laiyz.util.CtxUtil;
@@ -22,7 +21,7 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class FileRspHelper {
 
-    public static void handleFileData(ChannelHandlerContext ctx, BFileMsg.BFileRsp rsp, ByteBuf msg) {
+    public static void handleFileData(ChannelHandlerContext ctx, SenderMsg.Rsp rsp, ByteBuf msg, boolean writeProgress ) {
         byte[] fileData = parseFileData(msg);
         FileTask fileTask = null;
         if ((fileTask = ClientCache.getTask(rsp.getId())) == null) {
@@ -31,9 +30,8 @@ public class FileRspHelper {
             fileTask.addListner(new FileTaskListener());
         }
 
-        // append part of file data to storage buffer(sbuf) of task
-        StatusEnum status = fileTask.appendFileData(ctx,fileData, rsp);
-        // all file data received, try to start next file download
+        StatusEnum status = fileTask.appendFileData(ctx,fileData, rsp,  writeProgress);
+
         if (status == StatusEnum.COMPLETED) {
             log.info("file({}) transfer complete.", rsp.getFilepath());
             handleNext(ctx);
@@ -63,7 +61,7 @@ public class FileRspHelper {
 
             ctx.write(Unpooled.wrappedBuffer(ConstUtil.sender_req_prefix.getBytes(CharsetUtil.UTF_8)));
             SenderMsg.Rsp senderMsgRsp = SenderMsg.Rsp.newBuilder()
-                    .setCmd(BFileCmd.RSP_UPLOAD_COMPLETED)
+                    .setCmd(BFileCmd.RSP_COMPLETED)
                     .build();
             ctx.write(Unpooled.wrappedBuffer(senderMsgRsp.toByteArray()));
             ctx.writeAndFlush(Unpooled.wrappedBuffer(ConstUtil.delimiter.getBytes(CharsetUtil.UTF_8)));

@@ -4,6 +4,7 @@ import com.laiyz.client.base.ClientCache;
 import com.laiyz.client.base.FileRspHelper;
 import com.laiyz.config.Config;
 import com.laiyz.proto.BFileMsg;
+import com.laiyz.proto.SenderMsg;
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.Unpooled;
 import io.netty.channel.ChannelHandlerContext;
@@ -24,12 +25,12 @@ public class ChunkedReadHandler extends SimpleChannelInboundHandler<ByteBuf> {
         if (Config.sslEnabled() && StringUtils.isNotBlank(ClientCache.currRecvFileKey())) {
             // ----- chunked file data arrival
             log.info("currRecvFileKey: {}", ClientCache.currRecvFileKey());
-            BFileMsg.BFileRsp rsp = ClientCache.getRspInfo(ClientCache.currRecvFileKey());
+            SenderMsg.Rsp rsp = ClientCache.getRspInfo(ClientCache.currRecvFileKey());
             if (rsp == null) {
                 log.error("not found BFileRsp via currRecvFileKey: {}", ClientCache.currRecvFileKey());
                 throw new RuntimeException("not found BFileRsp");
             }
-            FileRspHelper.handleFileData(ctx, rsp, msg);
+            FileRspHelper.handleFileData(ctx, rsp, msg, true);
         } else { // not chunked file data, just forward msg next handler
 //            ctx.fireChannelRead(msg);
             byte[] data = new byte[msg.readableBytes()];

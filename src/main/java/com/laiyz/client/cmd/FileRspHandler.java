@@ -4,6 +4,7 @@ import com.laiyz.client.base.ClientCache;
 import com.laiyz.client.base.FileRspHelper;
 import com.laiyz.config.Config;
 import com.laiyz.proto.BFileMsg;
+import com.laiyz.proto.SenderMsg;
 import com.laiyz.util.BFileUtil;
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandlerContext;
@@ -12,7 +13,7 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class FileRspHandler extends CmdHandler {
 
-    public void handle(ChannelHandlerContext ctx, BFileMsg.BFileRsp rsp, ByteBuf msg) {
+    public void handle(ChannelHandlerContext ctx, SenderMsg.Rsp rsp, ByteBuf msg) {
         log.info("transferring file({})...", rsp.getFilepath());
 
         // ssl enabled, file transferred in ChunkedFile mode,
@@ -26,7 +27,7 @@ public class FileRspHandler extends CmdHandler {
         }
 
         // zero-copy(FileRegion) mode, file data handling here
-        FileRspHelper.handleFileData(ctx, rsp, msg);
+        FileRspHelper.handleFileData(ctx, rsp, msg, true);
     }
 
 

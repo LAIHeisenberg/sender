@@ -79,7 +79,7 @@ public class FileClientHandler extends SimpleChannelInboundHandler<ByteBuf> {
                     System.out.print("\r"+result);
 //                    log.info("\r send file data, progress: {}/{}({}%) avg speed:{}", recvSize, fileSize, Math.floor((recvSize*1d/fileSize*1d) * 10000)/100, calcAvgSpeed(rsp.getCurrRecvSize(), rsp.getReqTs()));
                     break;
-                case BFileCmd.RSP_UPLOAD_COMPLETED:
+                case BFileCmd.RSP_COMPLETED:
                     System.out.println("\nall files send.");
                     break;
             }

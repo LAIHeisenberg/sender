@@ -2,6 +2,7 @@ package com.laiyz.client.base;
 
 import com.laiyz.client.cmd.CmdHandler;
 import com.laiyz.proto.BFileMsg;
+import com.laiyz.proto.SenderMsg;
 import com.laiyz.util.BFileUtil;
 import com.google.protobuf.InvalidProtocolBufferException;
 import io.netty.buffer.ByteBuf;
@@ -15,7 +16,7 @@ import lombok.extern.slf4j.Slf4j;
 public class RspDispatcher {
 
     public static void dispatch(ChannelHandlerContext ctx, ByteBuf msg) {
-        BFileMsg.BFileRsp rsp = parseFileInfo(msg);
+        SenderMsg.Rsp rsp = parseFileInfo(msg);
         String cmd = rsp.getCmd();
         CmdHandler cmdHandler = ClientCmdRegister.getHandler(cmd);
         if (cmdHandler == null) {
@@ -31,8 +32,8 @@ public class RspDispatcher {
      * @param msg
      * @return
      */
-    private static BFileMsg.BFileRsp parseFileInfo(ByteBuf msg) {
-        BFileMsg.BFileRsp rsp = null;
+    private static SenderMsg.Rsp parseFileInfo(ByteBuf msg) {
+        SenderMsg.Rsp rsp = null;
         // --------------- decode BFileRsp & chunkData
         boolean isBFile = BFileUtil.isBFileStream(msg);
         if (isBFile) {
@@ -42,7 +43,7 @@ public class RspDispatcher {
             byte[] bfileInfoData = new byte[bfileInfoSize];
             msg.readBytes(bfileInfoData);
             try {
-                rsp = BFileMsg.BFileRsp.parseFrom(bfileInfoData);
+                rsp = SenderMsg.Rsp.parseFrom(bfileInfoData);
                 if (rsp == null) {
                     throw new RuntimeException("server recv stream code to bfile error.");
                 }

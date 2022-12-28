@@ -3,7 +3,6 @@ package com.laiyz.server.base;
 import com.laiyz.comm.BFileCmd;
 import com.laiyz.server.cmd.CmdHandler;
 import com.laiyz.server.cmd.FileReqHandler;
-import com.laiyz.server.cmd.ListReqHandler;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -14,7 +13,6 @@ public class CmdRegister {
 
     public static void init() {
         register(BFileCmd.REQ_FILE, new FileReqHandler());
-        register(BFileCmd.REQ_LIST, new ListReqHandler());
 
     }
 

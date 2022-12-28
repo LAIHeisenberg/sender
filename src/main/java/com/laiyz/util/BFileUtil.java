@@ -421,8 +421,8 @@ public class BFileUtil {
         return buildRsp(BFileCmd.RSP_FILE, serverpath, filesize, checksum, null, null, reqTs);
     }
 
-    public static ByteBuf buildPullFile(String serverpath, long filesize, String checksum, long reqTs) {
-        return buildRsp(BFileCmd.RSP_PULL, serverpath, filesize, checksum, null, null, reqTs);
+    public static ByteBuf buildPullFile(String serverpath, long filesize, String checksum, Long recvSize, Long currRecvSize, long reqTs) {
+        return buildRsp(BFileCmd.RSP_PULL, serverpath, filesize, checksum, recvSize, currRecvSize, reqTs);
     }
 
     public static ByteBuf buildRspDir(String serverpath, long reqTs) {
@@ -440,7 +440,7 @@ public class BFileUtil {
     public static ByteBuf buildRspList(String serverpath, String rspData, long reqTs) {
         // checksum: rspData 's md5 hash
         String checksum = MD5.asHex(BByteUtil.toBytes(rspData));
-        return buildRsp(BFileCmd.RSP_LIST, serverpath, 0, checksum, rspData, null, reqTs);
+        return buildRsp(BFileCmd.RSP_LIST, serverpath, 0, checksum, null, null, reqTs);
     }
 
 
@@ -473,12 +473,10 @@ public class BFileUtil {
      * @param filePath
      * @param fileSize
      * @param checksum
-     * @param rspData
-     * @param chunkData
      * @param reqTs
      * @return
      */
-    private static ByteBuf buildRsp(String cmd, String filePath, long fileSize, String checksum, String rspData, byte[] chunkData, long reqTs) {
+    private static ByteBuf buildRsp(String cmd, String filePath, long fileSize, String checksum, Long recvSize, Long currRecvSize, long reqTs) {
         // BFile info prefix
         byte[] prefix = BByteUtil.toBytes(ConstUtil.bfile_info_prefix);
         // BFile info
@@ -489,6 +487,8 @@ public class BFileUtil {
                 .setFilepath(filePath) // relative path(not contains client.dir or server.dir)
                 .setFileSize(fileSize)
                 .setChecksum(checksum) // file fingerprint/ md5(server_dir_abs_path)
+                .setCurrRecvSize(1)
+                .setRecvSize(1)
                 .setReqTs(reqTs)
                 .setRspTs(System.currentTimeMillis())
                 .build();

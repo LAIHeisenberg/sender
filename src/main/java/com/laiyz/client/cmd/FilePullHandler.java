@@ -16,11 +16,13 @@ import java.time.Instant;
 @Slf4j
 public class FilePullHandler extends CmdHandler {
 
+    long recvSize = 0;
     public void handle(ChannelHandlerContext ctx, SenderMsg.Rsp rsp, ByteBuf msg) {
         log.info("transferring file({})...", rsp.getFilepath());
         FileRspHelper.handleFileData(ctx, rsp, msg, false);
-        long recvSize = rsp.getRecvSize();
+
         long fileSize = rsp.getFileSize();
+        long recvSize = rsp.getRecvSize();
         String result = String.format("receive file data, progress: %s/%s(%s%%) avg speed:%s remaining time: %s", recvSize, fileSize, Math.floor((recvSize*1d/fileSize*1d) * 10000)/100, calcAvgSpeed(rsp.getCurrRecvSize(), rsp.getReqTs()), calcTimeRemaining(fileSize-recvSize,rsp.getCurrRecvSize(),rsp.getReqTs()));
         System.out.print("\r"+result);
 

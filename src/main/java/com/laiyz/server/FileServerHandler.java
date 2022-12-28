@@ -147,53 +147,39 @@ public class FileServerHandler extends SimpleChannelInboundHandler<ByteBuf> {
 
         long startTime = System.currentTimeMillis();
         // SSL enabled - cannot use zero-copy file transfer.
-        if (ctx.pipeline().get(SslHandler.class) != null) {
-            // send BFileRsp header info
-            ByteBuf rspBuf = BFileUtil.buildPullFile(filePath, filelen, checksum, reqTs);
+
+        long currSendSize = 0;
+        int chunkSize;
+        while ((filelen - pos) > 0) {
+            /**
+             * Standard Rsp format like:
+             * +--------------------------------------------------------+
+             * | bfile_info_prefix | bfile_info_bytes(int) | bfile_info |
+             * +--------------------------------------------------------+
+             * <p>
+             */
+            ByteBuf rspBuf = BFileUtil.buildPullFile(filePath, filelen, checksum, pos, currSendSize, reqTs);
             ctx.write(rspBuf);
+            /**
+             * Non-standard format:
+             * appending send following data to channel directly(not assemble to full data format because
+             * FileRegion not support extract data (TBD)
+             *
+             * +------------------------+
+             * | chunk_data | delimiter |
+             * +------------------------+
+             **/
+            chunkSize = (int) Math.min(ConstUtil.DEFAULT_CHUNK_SIZE, (filelen - pos));
+            log.debug("current pos: {}, will write {} bytes to channel.", pos, chunkSize);
+
+            ctx.write(new DefaultFileRegion(file, pos, chunkSize));
             ctx.writeAndFlush(Unpooled.wrappedBuffer(ConstUtil.delimiter.getBytes(CharsetUtil.UTF_8)));
 
-            // send ChunkedFile data
-            try {
-                ctx.writeAndFlush(new ChunkedFile(file));
-            } catch (IOException e) {
-                log.error("write and flush chunked file error.", e);
-            }
-        } else { // zero-copy FileRegion mode
-
-            int chunkCounter = 0;
-            int chunkSize;
-            while ((filelen - pos) > 0) {
-                /**
-                 * Standard Rsp format like:
-                 * +--------------------------------------------------------+
-                 * | bfile_info_prefix | bfile_info_bytes(int) | bfile_info |
-                 * +--------------------------------------------------------+
-                 * <p>
-                 */
-                ByteBuf rspBuf = BFileUtil.buildPullFile(filePath, filelen, checksum, reqTs);
-                int rspInfoLen = rspBuf.readableBytes();
-                ctx.write(rspBuf);
-                /**
-                 * Non-standard format:
-                 * appending send following data to channel directly(not assemble to full data format because
-                 * FileRegion not support extract data (TBD)
-                 *
-                 * +------------------------+
-                 * | chunk_data | delimiter |
-                 * +------------------------+
-                 **/
-                chunkSize = (int) Math.min(ConstUtil.DEFAULT_CHUNK_SIZE, (filelen - pos));
-                log.debug("current pos: {}, will write {} bytes to channel.", pos, chunkSize);
-
-                ctx.write(new DefaultFileRegion(file, pos, chunkSize));
-                ctx.writeAndFlush(Unpooled.wrappedBuffer(ConstUtil.delimiter.getBytes(CharsetUtil.UTF_8)));
-
-                chunkCounter++;
-                pos += chunkSize;
+            currSendSize += chunkSize;
+            pos += chunkSize;
 //                log.info("=============== wrote the {} chunk, wrote len: {}, progress: {}/{} =============", chunkCounter, (rspInfoLen + chunkSize), pos, filelen);
-            }
         }
+
         log.info("write file({}) to channel cost time: {} sec.", filePath, (System.currentTimeMillis() - startTime) / 1000);
 
     }

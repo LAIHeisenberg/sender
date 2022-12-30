@@ -104,9 +104,10 @@ public class FileServerHandler extends SimpleChannelInboundHandler<ByteBuf> {
             }
         }else {
             msg.resetReaderIndex();
-            byte[] data = new byte[msg.readableBytes()];
-            msg.readBytes(data);
-            ctx.fireChannelRead(Unpooled.wrappedBuffer(data));
+
+//            byte[] data = new byte[msg.readableBytes()];
+//            msg.readBytes(data);
+//            ctx.fireChannelRead(msg);
         }
     }
 

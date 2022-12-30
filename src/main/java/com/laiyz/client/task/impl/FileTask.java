@@ -9,12 +9,16 @@ import com.laiyz.util.BFileUtil;
 import com.laiyz.util.ConstUtil;
 import com.laiyz.util.ThreadPoolUtil;
 import io.netty.buffer.ByteBuf;
+import io.netty.buffer.ByteBufAllocator;
+import io.netty.buffer.CompositeByteBuf;
 import io.netty.buffer.Unpooled;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.util.CharsetUtil;
 import lombok.extern.slf4j.Slf4j;
 
 import java.io.*;
+import java.nio.ByteBuffer;
+import java.nio.channels.GatheringByteChannel;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.text.DecimalFormat;
@@ -43,9 +47,13 @@ public class FileTask implements ITask {
     // 4M
     private final int SBUF_SIZE = 4 * 1024 * 1024;
     // accumulate SBUF_SIZE before save file data
-    private byte[] sbuf = new byte[SBUF_SIZE];
+//    private byte[] sbuf = new byte[SBUF_SIZE];
+
+//    CompositeByteBuf compositeByteBuf = ByteBufAllocator.DEFAULT.compositeDirectBuffer(512);
+
+
     // sbuf next write position
-    private int spos = 0;
+//    private int spos = 0;
 
     private String clientFullPath = null;
     private String tempFullPath = null;
@@ -95,26 +103,21 @@ public class FileTask implements ITask {
 
     public void resetRecvSize(long recvSize){
         this.recvSize = recvSize;
-        this.spos = 0;
         this.currRecvSize = 0;
     }
 
     @Override
-    public StatusEnum appendFileData(ChannelHandlerContext ctx, byte[] fileData, SenderMsg.Rsp rsp, boolean writeProgress) {
+    public StatusEnum appendFileData(ChannelHandlerContext ctx,  ByteBuf msg, SenderMsg.Rsp rsp, boolean writeProgress) {
         counter++;
-        int len = fileData.length;
+        int len = msg.readableBytes();
         if (len <= 0) {
             log.warn("recv file data is 0.");
             return StatusEnum.NO_DATA;
         }
 
-        checkSBufSpace(len);
-        // append data to storage buffer(sbuf)
-        System.arraycopy(fileData, 0, sbuf, spos, len);
-        // increase sbuf next write pos
-        spos += len;
         recvSize += len;
         currRecvSize += len;
+//        msg.retain(1);
 
         if (writeProgress){
             ThreadPoolUtil.submitTask(() -> {
@@ -134,19 +137,20 @@ public class FileTask implements ITask {
 
         boolean saveOK;
         long saveSize = 0l;
+
         // sbuf full or all file data received
-        if (spos >= SBUF_SIZE || recvSize == fileSize) {
+//        if (compositeByteBuf.capacity() >= SBUF_SIZE || recvSize == fileSize) {
+            saveSize = saveToDisk(msg);
             // do save file data to disk
-            saveSize = saveToDisk();
             saveOK = saveSize > 0;
-            // reset recvSize, sbuf
             if (!saveOK) {
-                log.warn("save file data error, recvSize: {}, spos: {}, len: ", recvSize, spos, len);
+                log.warn("save file data error, recvSize: {}, len: ", recvSize, len);
                 return StatusEnum.ERR_SAVE_DATA;
             }
-            log.info("saveOK, saveSize: {}, recvSize: {}, spos: {}, len: {}", saveSize, recvSize, spos, len);
-            resetSbuf();
-        }
+            log.info("saveOK, saveSize: {}, recvSize: {}, len: {}", saveSize, recvSize, len);
+
+
+//        }
         // saveOK, and all bytes received
         if (recvSize == fileSize && recvSize == saveSize) {
             closeFos();
@@ -187,11 +191,12 @@ public class FileTask implements ITask {
      * @param appendLen
      */
     private void checkSBufSpace(int appendLen) {
-        if ( (spos + appendLen) >= SBUF_SIZE ) {
-            byte[] sbuf2 = new byte[spos + appendLen];
-            System.arraycopy(sbuf, 0, sbuf2, 0, (spos+1));
-            sbuf = sbuf2;
-        }
+
+//        if ( (spos + appendLen) >= SBUF_SIZE ) {
+//            byte[] sbuf2 = new byte[spos + appendLen];
+//            System.arraycopy(sbuf, 0, sbuf2, 0, (spos+1));
+//            sbuf = sbuf2;
+//        }
     }
 
     private void checkFileExists(String filepath) {
@@ -204,27 +209,15 @@ public class FileTask implements ITask {
         }
     }
 
-    private long saveToDisk() {
+    private long saveToDisk(ByteBuf byteBuf){
         try {
-            // sbuf full data
-            if (spos >= SBUF_SIZE) {
-                fos.write(sbuf);
-            } else { // sbuf not full data
-                byte[] wdata = new byte[spos];
-                System.arraycopy(sbuf, 0, wdata, 0, spos);
-                fos.write(wdata);
-            }
-
-            log.debug("wrote data to disk ...");
+            byteBuf.readBytes(fos.getChannel(),0, byteBuf.readableBytes());
+//            fos.getChannel().write(byteBuf.nioBuffer());
             return fos.getChannel().size();
-        } catch (IOException e) {
+        }catch (Exception e){
             log.error("wrote data to disk error.", e);
             return 0;
         }
-    }
-
-    private void resetSbuf() {
-        spos = 0;
     }
 
     private void closeFos() {

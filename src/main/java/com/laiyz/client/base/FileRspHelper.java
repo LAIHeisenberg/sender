@@ -22,7 +22,7 @@ import lombok.extern.slf4j.Slf4j;
 public class FileRspHelper {
 
     public static void handleFileData(ChannelHandlerContext ctx, SenderMsg.Rsp rsp, ByteBuf msg, boolean writeProgress ) {
-        byte[] fileData = parseFileData(msg);
+//        byte[] fileData = parseFileData(msg);
         FileTask fileTask = null;
         if ((fileTask = ClientCache.getTask(rsp.getId())) == null) {
             fileTask = new FileTask(rsp);
@@ -30,7 +30,7 @@ public class FileRspHelper {
             fileTask.addListner(new FileTaskListener());
         }
 
-        StatusEnum status = fileTask.appendFileData(ctx,fileData, rsp,  writeProgress);
+        StatusEnum status = fileTask.appendFileData(ctx, msg, rsp,  writeProgress);
 
         if (status == StatusEnum.COMPLETED) {
             log.info("file({}) transfer complete.", rsp.getFilepath());

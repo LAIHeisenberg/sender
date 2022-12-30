@@ -48,28 +48,6 @@ public class FilePullClientHandler extends SimpleChannelInboundHandler<ByteBuf> 
     }
 
     @Override
-    public void channelActive(ChannelHandlerContext ctx) throws Exception {
-
-        if (StringUtils.isBlank(serverFilePath)){
-            throw new IllegalArgumentException("服务器文件路径不能为空");
-        }
-        if (StringUtils.isBlank(distFilePath)){
-            throw new IllegalArgumentException("目标文件路径不能为空");
-        }
-
-        try {
-            long fileLength = BFileUtil.getFileLength(this.distFilePath + Config.tempFilePostfix());
-            SenderMsg.Req req = BFileUtil.buildSenderReq(BFileCmd.REQ_PULL, this.serverFilePath, fileLength);
-            ctx.write(Unpooled.wrappedBuffer(ConstUtil.sender_req_prefix.getBytes(CharsetUtil.UTF_8)));
-            ctx.write(Unpooled.wrappedBuffer(req.toByteArray()));
-            ctx.writeAndFlush(Unpooled.wrappedBuffer(ConstUtil.delimiter.getBytes(CharsetUtil.UTF_8)));
-        }catch (Exception e){}
-
-        super.channelActive(ctx);
-
-    }
-
-    @Override
     public void channelRead0(ChannelHandlerContext ctx, ByteBuf msg) throws Exception {
 
         int len = msg.readableBytes();
@@ -98,6 +76,7 @@ public class FilePullClientHandler extends SimpleChannelInboundHandler<ByteBuf> 
             RspDispatcher.dispatch(ctx, msg);
         }
 
+        msg.release();
     }
 
 }

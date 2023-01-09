@@ -25,6 +25,7 @@ import com.laiyz.proto.SenderMsg;
 import com.laiyz.server.base.ReqDispatcher;
 import com.laiyz.util.BFileUtil;
 import com.laiyz.util.ConstUtil;
+import com.laiyz.util.FileUtil;
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.Unpooled;
 import io.netty.channel.ChannelFutureListener;
@@ -90,7 +91,7 @@ public class FileServerHandler extends SimpleChannelInboundHandler<ByteBuf> {
                     String filePath = req.getFilepath();
                     long fileLength = BFileUtil.getFileLength(filePath);
                     if (fileLength > 0){
-                        sendFile(ctx,filePath,req.getAccessFilePosition(),req.getTs());
+//                        FileUtil.send(ctx,filePath,req.getAccessFilePosition(),req.getTs());
                     }else {
                         ctx.write(Unpooled.wrappedBuffer(ConstUtil.sender_req_prefix.getBytes(CharsetUtil.UTF_8)));
                         rsp = SenderMsg.Rsp.newBuilder()
@@ -123,67 +124,6 @@ public class FileServerHandler extends SimpleChannelInboundHandler<ByteBuf> {
     }
 
 
-    /**
-     * Non-standard format(append byte[] data after Rsp object, because cannot retrieve the data and set to Rsp.chunkData:
-     * e.g. FileRsp(cmd: CMD_REQ) data format(only for FileRegion which directly write file data to channel):
-     * +---------------------------------------------------------------------------------+
-     * | bfile_info_prefix | bfile_info_bytes(int) | bfile_info | chunk_data | delimiter |
-     * +---------------------------------------------------------------------------------+
-     * <p>
-     *
-     * @param ctx
-     * @param filePath -  file full path
-     * @param reqTs      - timestamp of client request this file
-     */
-    private void sendFile(ChannelHandlerContext ctx, String filePath, long pos, long reqTs) {
-        log.debug(">>>>>>>>>> sending file/dir: {}", filePath);
-        File file = new File(filePath);
-        if (Files.isDirectory(Paths.get(filePath))) {
-            return;
-        }
-        // file checksume
-        String checksum = BFileUtil.checksum(file);
-
-        long filelen = file.length();
-
-        long startTime = System.currentTimeMillis();
-        // SSL enabled - cannot use zero-copy file transfer.
-
-        long currSendSize = 0;
-        int chunkSize;
-        while ((filelen - pos) > 0) {
-            /**
-             * Standard Rsp format like:
-             * +--------------------------------------------------------+
-             * | bfile_info_prefix | bfile_info_bytes(int) | bfile_info |
-             * +--------------------------------------------------------+
-             * <p>
-             */
-            ByteBuf rspBuf = BFileUtil.buildPullFile(filePath, filelen, checksum, pos, currSendSize, reqTs);
-            ctx.write(rspBuf);
-            /**
-             * Non-standard format:
-             * appending send following data to channel directly(not assemble to full data format because
-             * FileRegion not support extract data (TBD)
-             *
-             * +------------------------+
-             * | chunk_data | delimiter |
-             * +------------------------+
-             **/
-            chunkSize = (int) Math.min(ConstUtil.DEFAULT_CHUNK_SIZE, (filelen - pos));
-            log.debug("current pos: {}, will write {} bytes to channel.", pos, chunkSize);
-
-            ctx.write(new DefaultFileRegion(file, pos, chunkSize));
-            ctx.writeAndFlush(Unpooled.wrappedBuffer(ConstUtil.delimiter.getBytes(CharsetUtil.UTF_8)));
-
-            currSendSize += chunkSize;
-            pos += chunkSize;
-//                log.info("=============== wrote the {} chunk, wrote len: {}, progress: {}/{} =============", chunkCounter, (rspInfoLen + chunkSize), pos, filelen);
-        }
-
-        log.info("write file({}) to channel cost time: {} sec.", filePath, (System.currentTimeMillis() - startTime) / 1000);
-
-    }
 
 }
 

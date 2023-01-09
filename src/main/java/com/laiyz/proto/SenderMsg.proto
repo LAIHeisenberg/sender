@@ -26,3 +26,17 @@ message Rsp{
     uint64 rspTs = 9;
     uint64 accessFilePosition = 10;
 }
+
+
+message PullRsp{
+
+    string id = 1;
+    string cmd = 2;
+    string srcFilePath = 3;
+    string destFilePath = 4;
+    uint64 fileSize = 5;
+    string checksum = 6;
+    uint64 chunkSize = 7;
+    uint64 reqTs = 8;
+
+}

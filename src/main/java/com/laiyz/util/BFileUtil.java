@@ -1,5 +1,6 @@
 package com.laiyz.util;
 
+import cn.hutool.crypto.symmetric.AES;
 import com.google.protobuf.ByteString;
 import com.laiyz.comm.BFileCmd;
 import com.laiyz.comm.BFileInfo;
@@ -421,8 +422,55 @@ public class BFileUtil {
         return buildRsp(BFileCmd.RSP_FILE, serverpath, filesize, checksum, null, null, reqTs);
     }
 
-    public static ByteBuf buildPullFile(String serverpath, long filesize, String checksum, Long recvSize, Long currRecvSize, long reqTs) {
-        return buildRsp(BFileCmd.RSP_PULL, serverpath, filesize, checksum, recvSize, currRecvSize, reqTs);
+    public static ByteBuf buildPullFile(String serverpath, String destFilePath, long filesize, String checksum, Long chunkSize, long reqTs) {
+
+        // BFile info prefix
+        byte[] prefix = BByteUtil.toBytes(ConstUtil.bfile_info_prefix);
+        // BFile info
+        SenderMsg.PullRsp rsp = SenderMsg.PullRsp.newBuilder()
+                .setId(getReqId(serverpath)) // rspId = reqId
+                .setCmd(BFileCmd.RSP_PULL) //BFileCmd.CMD_RSP)
+                .setSrcFilePath(serverpath) // relative path(not contains client.dir or server.dir)
+                .setDestFilePath(destFilePath)
+                .setChecksum(checksum) // file fingerprint/ md5(server_dir_abs_path)
+                .setFileSize(filesize)
+                .setChunkSize(chunkSize)
+                .setReqTs(reqTs)
+                .build();
+        byte[] rspWithoutFileData = rsp.toByteArray();
+
+        int bfileInfoLen = rspWithoutFileData.length;
+        byte[] bifileInfoBytes = BByteUtil.toBytes(bfileInfoLen);
+
+        /**
+         * bytes size format:
+         * +----------------------------------------------------------------+
+         * | bfile_info_prefix_len | bfile_info_bytes(int) | bfile_info_len |
+         * +----------------------------------------------------------------+
+         *
+         */
+        // assemble data
+        int cpos = 0;
+        byte[] data = new byte[prefix.length + Integer.BYTES + rspWithoutFileData.length];
+        // bfile_info_prefix
+        System.arraycopy(prefix, 0, data, cpos, prefix.length);
+        // bfile_info size
+        cpos += prefix.length;
+        System.arraycopy(bifileInfoBytes, 0, data, cpos, Integer.BYTES);
+        // bfile_info
+        cpos += Integer.BYTES;
+        System.arraycopy(rspWithoutFileData, 0, data, cpos, rspWithoutFileData.length);
+
+        ByteBuf bbuf = Unpooled.directBuffer(data.length);
+        bbuf.writeBytes(data);
+
+        return bbuf;
+
+
+
+
+//        SenderMsg.PullRsp.newBuilder().setId();
+//        return buildRsp(BFileCmd.RSP_PULL, serverpath, filesize, checksum, recvSize, currRecvSize, reqTs);
     }
 
     public static ByteBuf buildRspDir(String serverpath, long reqTs) {
@@ -551,9 +599,9 @@ public class BFileUtil {
         return req;
     }
 
-    public static SenderMsg.Req buildSenderReq(String cmd, String filepath, long accessFilePosition) {
+    public static SenderMsg.Req buildSenderReq(String cmd, String filepath, String destFilePath, long accessFilePosition) {
         SenderMsg.Req req = SenderMsg.Req.newBuilder()
-                .setId(getReqId(filepath))
+                .setId(getReqId(filepath+destFilePath))
                 .setCmd(cmd)
                 .setFilepath(filepath)
                 .setTs(Instant.now().getEpochSecond())

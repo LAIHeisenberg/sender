@@ -18,7 +18,7 @@ public class FilePullHandler extends CmdHandler {
 
     long recvSize = 0;
     public void handle(ChannelHandlerContext ctx, SenderMsg.Rsp rsp, ByteBuf msg) {
-        log.info("transferring file({})...", rsp.getFilepath());
+        log.info("pulling file({})...", rsp.getFilepath());
         FileRspHelper.handleFileData(ctx, rsp, msg, false);
 
         long fileSize = rsp.getFileSize();

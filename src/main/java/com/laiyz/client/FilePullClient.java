@@ -27,7 +27,7 @@ import java.io.File;
 @Slf4j
 public class FilePullClient {
 
-    public void startup(String serverFilePath, String distFilePath) {
+    public void startup(String serverFilePath, String destFilePath) {
 
         EventLoopGroup group = new NioEventLoopGroup();
         ClientCmdRegister.init();
@@ -41,7 +41,7 @@ public class FilePullClient {
                     public void initChannel(SocketChannel ch) throws Exception {
                         ChannelPipeline p = ch.pipeline();
                         p.addLast(new DelimiterBasedFrameDecoder(Integer.MAX_VALUE, Unpooled.copiedBuffer(ConstUtil.delimiter.getBytes(CharsetUtil.UTF_8))));
-                        p.addLast(new FilePullClientHandler(serverFilePath, distFilePath));
+                        p.addLast(new FilePullClientHandler(serverFilePath, destFilePath));
                     }
                 });
             // Start the client.
@@ -53,13 +53,13 @@ public class FilePullClient {
                 if (StringUtils.isBlank(serverFilePath)){
                     throw new IllegalArgumentException("服务器文件路径不能为空");
                 }
-                if (StringUtils.isBlank(distFilePath)){
+                if (StringUtils.isBlank(destFilePath)){
                     throw new IllegalArgumentException("目标文件路径不能为空");
                 }
 
                 try {
-                    long fileLength = BFileUtil.getFileLength(distFilePath + Config.tempFilePostfix());
-                    SenderMsg.Req req = BFileUtil.buildSenderReq(BFileCmd.REQ_PULL, serverFilePath, fileLength);
+                    long fileLength = BFileUtil.getFileLength(destFilePath + Config.tempFilePostfix());
+                    SenderMsg.Req req = BFileUtil.buildSenderReq(BFileCmd.REQ_PULL, serverFilePath, destFilePath, fileLength);
                     cfl.channel().write(Unpooled.wrappedBuffer(ConstUtil.sender_req_prefix.getBytes(CharsetUtil.UTF_8)));
                     cfl.channel().write(Unpooled.wrappedBuffer(req.toByteArray()));
                     cfl.channel().writeAndFlush(Unpooled.wrappedBuffer(ConstUtil.delimiter.getBytes(CharsetUtil.UTF_8)));
